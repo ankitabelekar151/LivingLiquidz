@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Customer Signup{% endblock %}
+
+{% block content %}
+
+
+
+<div class="">
+    <div class="">
+        <div class="col-md-6">
+            <h2>Signup</h2>
+            <form action="/submit_signup" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="email" class="">Email:</label>
+                    <input type="email" class="" id="email" name="email" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Get OTP</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
