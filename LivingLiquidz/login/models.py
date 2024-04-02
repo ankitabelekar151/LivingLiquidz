@@ -57,3 +57,47 @@ class LlUserGroup(models.Model):
 class LlUserPermission(models.Model):
     user = models.ForeignKey(LlUser, on_delete=models.CASCADE)
     permission = models.ForeignKey(Permission, on_delete=models.CASCADE)
+
+
+class customer_user(models.Model):
+    user = models.ForeignKey(LlUser, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=250)
+    last_name = models.CharField(max_length=250)
+    email = models.EmailField(max_length=250, default=None, null=True, blank=True)
+    date_of_birth = models.CharField(max_length=50, blank=True, null=True)
+    mobile_number = models.CharField(max_length=15, default=None, null=True, blank=True)
+    locality = models.CharField(max_length=250)
+    city = models.CharField(max_length=250)
+    pincode = models.IntegerField(null=True, blank=True)
+    # state = models.CharField(choices=STATE_CHOICES, max_length=5000)
+    is_customer = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='user_images/', null=True, blank=True)
+    def __str__(self):
+        return str(self.email)
+    
+
+class seller_user(models.Model):
+    user = models.ForeignKey(LlUser, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=250)
+    last_name = models.CharField(max_length=250)
+    email = models.EmailField(max_length=250, default=None, null=True, blank=True)
+    date_of_birth = models.CharField(max_length=50, blank=True, null=True)
+    mobile_number = models.CharField(max_length=15, default=None, null=True, blank=True)
+    locality = models.CharField(max_length=250)
+    city = models.CharField(max_length=250)
+    pincode = models.IntegerField(null=True, blank=True)
+    # state = models.CharField(choices=STATE_CHOICES, max_length=5000)
+    company_address=models.CharField(max_length=50, blank=True, null=True)
+    company_name=models.CharField(max_length=50, blank=True, null=True)
+    is_seller = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='user_images/', null=True, blank=True)
+
+    pan_card = models.ImageField(upload_to='pan_cards/', null=True, blank=True)
+    aadhar_card = models.ImageField(upload_to='aadhar_cards/', null=True, blank=True)
+    gst_document = models.ImageField(upload_to='gst_documents/', null=True, blank=True)
+    
+    commision = models.CharField(max_length=240, blank=True, null=True)
+    seller_reject = models.BooleanField(default=False)
+    seller_approved = models.BooleanField(default=False)

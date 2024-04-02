@@ -176,9 +176,25 @@
                   </div>
                 </form>
                 <ul class="navbar-nav ml-auto position-relative">
-                    <li class="nav-item">
-                      <a class="nav-link" href="/customer_signup/" style="color: #AE9479 !important;">Sign In</a>
+                  {% if request.user.is_authenticated and request.user.is_customer %} 
+                    <!-- If user is logged in -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #AE9479 !important;">
+                            Welcome,{{ request.user.first_name}}</br>
+                            My Account
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/customer_logout/">Logout</a>
+                            <!-- Add other dropdown items here -->
+                        </div>
                     </li>
+                    {% else %}
+                    <!-- If user is not logged in -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/customer_signin/" style="color: #AE9479 !important;">Sign In</a>
+                    </li>
+                    {% endif %} 
+              
                     <li class="nav-item position-relative">
                       <a class="nav-link" href="#" style="color: #AE9479 !important; position: relative;">
                         <i class="fas fa-shopping-cart"></i> 
@@ -193,7 +209,7 @@
     
     <div class="content">
         {% block content %}
-        <!-- Content of child pages goes here -->
+      
         {% endblock %}
     </div>
       
@@ -211,7 +227,7 @@
             <div class="col-md-4">
                 <h5>Liquid Legends</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#">Link 1</a></li>
+                    <li><a href="/seller_signup/">Seller Signin</a></li>
                     <li><a href="#">Link 2</a></li>
                     <li><a href="#">Link 3</a></li>
                     <li><a href="#">Link 4</a></li>

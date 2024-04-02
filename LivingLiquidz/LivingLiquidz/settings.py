@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
+    'seller',
+    'Admin',
 ]
 
 MIDDLEWARE = [
@@ -120,12 +123,45 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/static/'
+
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [STATIC_DIR]
+
+MEDIA_URL='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 300000
+
 AUTH_USER_MODEL = 'login.LlUser'
 
+
+# email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+DEFAULT_FROM_EMAIL = 'ankitabelekar151@gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'ankitabelekar151@gmail.com'
+EMAIL_HOST_PASSWORD = 'eexjxsyltlvvtpma'
+EMAIL_USE_TLS = True
+
+# LOGIN_URL = '/'
+# LOGOUT_URL = 'logout'
+# LOGIN_REDIRECT_URL = '/'
+
+# settings.py
+
+# # Session engine
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+# # Session cookie age (in seconds)
+# SESSION_COOKIE_AGE = 3600  # Set to desired session duration, e.g., 1 hour
+
+# # Session expiration at browser close
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Set to True if you want sessions to expire on browser close
