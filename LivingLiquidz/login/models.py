@@ -60,7 +60,7 @@ class LlUserPermission(models.Model):
 
 
 class customer_user(models.Model):
-    user = models.ForeignKey(LlUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(LlUser, on_delete=models.CASCADE, default=None)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     email = models.EmailField(max_length=250, default=None, null=True, blank=True)
@@ -78,7 +78,7 @@ class customer_user(models.Model):
     
 
 class seller_user(models.Model):
-    user = models.ForeignKey(LlUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(LlUser, on_delete=models.CASCADE, default=None)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     email = models.EmailField(max_length=250, default=None, null=True, blank=True)

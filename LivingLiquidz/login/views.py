@@ -6,10 +6,11 @@ import random
 from .models import LlUser, customer_user, seller_user
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from seller.models import Category
 
 
 def home(request):
-    
+
     return render(request, 'home_page.html')
 
 def generate_otp():
@@ -134,7 +135,9 @@ def seller_signin(request):
 
 def seller_logout(request):
     
-    return render(request, 'login/seller_logout.html')
+    logout(request)
+    return redirect('/')
+    
 
 def admin_login(request):
     if request.method == "POST":
@@ -160,4 +163,5 @@ def admin_login(request):
 
 def admin_logout(request):
     
-    return render(request, 'login/admin_logout.html')
+    logout(request)
+    return redirect('/')

@@ -1,0 +1,60 @@
+{% extends 'seller_base.html' %}
+
+{% block title %}Seller Dashboard{% endblock %}
+
+ {% block content %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Upload Form</title>
+</head>
+<body>
+    <h2>Product Upload Form</h2>
+    <form action="{% url 'seller_add_product' %}" method="post" enctype="multipart/form-data">
+        <label for="productName">Product Name:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="description">Description:</label><br>
+        <input type="text" id="description" name="description" required><br><br>
+
+        <label for="brand">Brand:</label><br>
+        <input type="text" id="brand" name="brand" required><br><br>
+
+        <label for="product_type">Product Type:</label><br>
+        <input type="text" id="product_type" name="product_type" required><br><br>
+
+        <label for="brand">:</label><br>
+        <input type="text" id="brand" name="brand" required><br><br>
+
+        <label for="size">Size (in ml):</label><br>
+        <select id="size" name="size" required>
+            <option value="90">90ml</option>
+            <option value="750">750ml</option>
+            <option value="60">60ml</option>
+            <option value="375">375ml</option>
+            <option value="200">200ml</option>
+            <option value="2000">2000ml</option>
+            <option value="180">180ml</option>
+            <option value="1000">1ltr</option>
+        </select><br><br>
+
+        <label for="quantity">Quantity:</label><br>
+        <input type="number" id="quantity" name="quantity" required><br><br>
+
+        <label for="actual_price">Actual Price:</label><br>
+        <input type="number" id="actual_price" name="actual_price"  required><br><br>
+
+        <label for="selling_price">Selling Price:</label><br>
+        <input type="number" id="selling_price" name="selling_price" required><br><br>
+
+        <label for="product_image">Product Image:</label><br>
+        <input type="file" id="product_image" name="product_image" accept="image/*" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
+{% endblock %}
