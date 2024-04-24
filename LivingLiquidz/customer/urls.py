@@ -7,5 +7,6 @@ urlpatterns = [
     path('indian_vodka_flavoured/',views.indian_vodka_flavoured,name="indian_vodka_flavoured"),
     path('indian_vodka_plain/',views.indian_vodka_plain,name="indian_vodka_plain"),
     path('imported_vodka_flavoured/',views.imported_vodka_flavoured,name="imported_vodka_flavoured"),
+    path('imported_vodka_plain/',views.imported_vodka_plain,name="imported_vodka_plain"),
     
 ]

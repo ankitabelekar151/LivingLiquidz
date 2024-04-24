@@ -24,6 +24,16 @@
           background-color: #311528 !important;
           color: white !important;
         }
+        .modal-header, h4, .close {
+          background-color: #5cb85c;
+          color:white !important;
+          text-align: center;
+          font-size: 30px;
+        }
+        .modal-footer {
+          background-color: #f9f9f9;
+        }
+      
       </style>
   <div class="container">
     <div class="row">
@@ -91,18 +101,42 @@
                     <h6>{{i.title}}</h6>
                     <p>{{i.description}}</p>
                     <p>{{i.price}} Rs</p>
-                    <p>{{i.size}}ML</p>
-                    <button class="btn compare-button">Compare</button>
+                    {% for s in i.get_sizes %}
+                        <button onclick="showPrice('{{ s.size }}')">{{ s.size }}</button>
+                    {% endfor %}
+                    <form method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="product_id" value="{{ i.id }}">
+                      <button type="submit" class="btn compare-button" data-product-id="{{ i.id }}">Compare</button>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
+         
           {% endfor %}         
         </div>
-      </div>
-    </div>
+        {% if table_data %}
+          {{ table_data|safe }}
+        {% endif %}  
+      </div> 
   </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script>
+    function showPrice(size) {
+        // Iterate over all sizes passed from Django template
+        {% for size in product.get_sizes %}
+            // Check if the current size matches the selected size
+            {% if size.size == size %}
+                var price = {{ size.price }};
+                document.getElementById("price-display").innerText = "Price: " + price;
+                return; // Exit the function after finding the price
+            {% endif %}
+        {% endfor %}
+        // If the size is not found, display "N/A"
+        document.getElementById("price-display").innerText = "Price: N/A";
+    }
+</script>
   
-
-
 {% endblock %}

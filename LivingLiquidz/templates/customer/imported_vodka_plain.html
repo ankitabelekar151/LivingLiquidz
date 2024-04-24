@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} whisky premium {% endblock %}
+{% block title %} whisky blended {% endblock %}
 
 {% block content %}
 {% load static %}
@@ -20,7 +20,7 @@
           max-width: 100%;
           height: auto;
         }
-        .back-button , .compare-button{
+        .compare-button{
           background-color: #311528 !important;
           color: white !important;
         }
@@ -80,7 +80,7 @@
         </div>
         <div class="row">
           <!-- Product 1 -->
-          {% for i in indian_whisky_premium %}
+          {% for i in imported_vodka_plain %}
           <div class="col-lg-6">
             <div class="product-box">
               <div class="row">
@@ -88,35 +88,21 @@
                     <img src="/media/{{ i.product_image }}" class="product-img" alt="Product 1">
                 </div>
                 <div class="col-md-8">
-                  <h6>{{i.title}}</h6>
-                  <p>{{i.description}}</p>
-                  <p>{{i.price}} Rs</p>
-                  <p>{{i.size}}ML</p>
-                  <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="product_id" value="{{ i.id }}">
-                    <button type="submit" class="btn compare-button" data-product-id="{{ i.id }}">Compare</button>
-                  </form>
+                    <h6>{{i.title}}</h6>
+                    <p>{{i.description}}</p>
+                    <p>{{i.price}} Rs</p>
+                    <p>{{i.size}}ML</p>
+                    <button class="btn compare-button" data-product-id="{{ product.id }}">Compare</button>
                 </div>
               </div>
             </div>
           </div>
           {% endfor %}         
         </div>
-
-          {% if table_data %}
-          <h1>Indian Whisky Premium</h1>
-              {{ table_data|safe }}
-              <button onclick="goBack()" class="btn back-button">Back</button>
-          {% endif %}
       </div>
     </div>
   </div>
   
-  <script>
-    function goBack() {
-        window.history.back();
-    }
-</script>
+
 
 {% endblock %}

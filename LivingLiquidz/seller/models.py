@@ -2,6 +2,7 @@ from django.db import models
 from login.models import *
 from datetime import datetime
 
+
 # Create your models here.
 
 # from mptt.models import MPTTModel, TreeForeignKey
@@ -74,3 +75,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_sizes(self):
+        return self.sizes.all()
