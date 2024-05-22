@@ -3,19 +3,31 @@
 {% block title %}Home {% endblock %}
 
 {% block content %}
-<style>
-  .c.img{
-    object-fit: cover;
-  }
-  .c-container{
-    height: 80vh;
-  }
-  @media screen and (max-width: 480px) {
-    .c-container{
-      height: 40vh;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liquor Legends- Home</title>
+  <meta name="description" content="">
+  <meta name="keyword" content="">
+  <link rel="canonical" href="">
+
+  <style>
+    .c.img{
+      object-fit: cover;
     }
-  }
-</style>
+    .c-container{
+      height: 80vh;
+    }
+    @media screen and (max-width: 480px) {
+      .c-container{
+        height: 40vh;
+      }
+    }
+  </style>
+</head>
+<body>
   <!-- Carousel Slider -->
   <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner c-container" >
@@ -119,6 +131,7 @@
   </div>
   <!-- card ends here-->
 
-
+</body>
+</html>
   
 {% endblock %}
