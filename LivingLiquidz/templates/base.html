@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 {% load static %}
-{% load custom_filter %}
 
 <html>
 <head>
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <title>Living Legends {% block title %} {% endblock title %}</title> -->
+  <title>{% block title %} {% endblock title %}</title> 
   <!-- Add any additional meta tags, stylesheets, or scripts here -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-qx8r5yrdz7h38x8y7fv0js2fzrye6kghcuc7lp1kwcq31p0i93qo9yfkxstf9zp5" crossorigin="anonymous">
   
@@ -55,62 +54,28 @@
     <header class="main-header">
       <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
         <div class="container">
-          <a class="navbar-brand" href="#"><img src="../media/upload_products/Logo.png" alt="Liquor Legends" width="150"></a>
+          <a class="navbar-brand" href="/"><img src="../media/upload_products/Logo.png" alt="Liquor Legends" width="150"></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           
           <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
             <ul class="navbar-nav mr-auto gap-0 gap-xl-2">
+              {% for cat in category %}
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Spirits
+                  {{cat.name}}
                 </a>
                 <div class="dropdown-menu p-3 mt-3 w-50" aria-labelledby="navbarDropdown2">
-                  <span class="txt-clr">Indian Whiksy</span>
-                    <a class="dropdown-item" href="/indian_whisky_blended/">Blended</a>
-                    <a class="dropdown-item" href="/indian_whisky_premium/">Premium</a>
-                  <span class="txt-clr">Indian Vodka</span>
-                    <a class="dropdown-item" href="/indian_vodka_flavoured/">Flavoured</a>
-                    <a class="dropdown-item" href="/indian_vodka_plain/">Plain</a>
-                  <span class="txt-clr">Imported</span>
-                    <a class="dropdown-item" href="/imported_vodka_flavoured/">Flavoured</a>
-                    <a class="dropdown-item" href="/imported_vodka_plain">Plain</a>
-                    <a class="dropdown-item" href="#">View All</a>
-                </div>
+                  {% for sub in cat.sub_category_set.all %}
+                  <span class="txt-clr">{{ sub.name }}</span>
+                    {% for sub_sub in sub.sub_sub_category_set.all %}
+                      <a class="dropdown-item" href="{% url 'category_products' sub_sub.id %}">{{ sub_sub.name }}</a>
+                    {% endfor %}
+                  {% endfor %}
+                </div>   
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" 
-                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wines</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                  <a class="dropdown-item" href="#">Red Wine</a>
-                  <a class="dropdown-item" href="#">White Wine</a>
-                  <a class="dropdown-item" href="#">View All</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3"
-                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Beers
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                  <a class="dropdown-item" href="#">Mild</a>
-                  <a class="dropdown-item" href="#">Strong</a>
-                  <a class="dropdown-item" href="#">Wheat</a>
-                  <a class="dropdown-item" href="#">View All</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Wine
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                  <a class="dropdown-item" href="#">Rum</a>
-                  <a class="dropdown-item" href="#">Brandy</a>
-                  <a class="dropdown-item" href="#">Scotch</a>
-                  <a class="dropdown-item" href="#">Gin</a>
-                </div>
-              </li>
+              {% endfor %}
             </ul>
             
             <form class="form-inline my-2 my-lg-0">
@@ -152,11 +117,11 @@
     </nav>    
   </header>
     
-    <div class="content">
-        {% block content %}
-      
-        {% endblock %}
-    </div>
+  <div class="content">
+      {% block content %}
+    
+      {% endblock %}
+  </div>
       
   <footer>
     <div class="footer1">

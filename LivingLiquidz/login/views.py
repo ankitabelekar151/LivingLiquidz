@@ -10,16 +10,15 @@ from seller.models import Category,Sub_Category,Sub_Sub_Category
 
 
 def home(request):
-    cat = Category.objects.all()
-    sub = Sub_Category.objects.all()
-    s = Sub_Sub_Category.objects.all()
-    # for i in s:
-    #     if i.sub_category.name == 'Indian-Whisky':
-    #         print('llllllllllllllllllllllllll',i.sub_category)
-    #     else:
-    #         print('jjjjjjjjjjjjjjjjjjjjj')
-    context = {'cat':cat}
-    return render(request, 'base.html',context)
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+    
+    context = {'category':category,
+               'sub_category':sub_category,
+               'sub_sub_category':sub_sub_category
+               }
+    return render(request, 'home_page.html',context)
 
 def generate_otp():
     return ''.join(random.choices('0123456789', k=6))

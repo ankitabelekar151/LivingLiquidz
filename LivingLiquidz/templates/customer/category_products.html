@@ -1,30 +1,30 @@
 {% extends 'base.html' %}
 
-{% block title %} whisky premium {% endblock %}
+{% block title %}{{sub_sub_category}}{% endblock %} 
 
 {% block content %}
 {% load static %}
 
 
-    <style>
-        .container {
-            margin-top: 20px; /* Adjust the value as needed */
-          }
-        /* Custom styles for product boxes */
-        .product-box {
-          border: 1px solid #ccc;
-          margin-bottom: 20px;
-          padding: 10px;
-        }
-        .product-img {
-          max-width: 100%;
-          height: auto;
-        }
-        .back-button , .compare-button{
-          background-color: #311528 !important;
-          color: white !important;
-        }
-      </style>
+<style>
+  .container {
+      margin-top: 20px; /* Adjust the value as needed */
+    }
+  /* Custom styles for product boxes */
+  .product-box {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+  }
+  .product-img {
+    max-width: 100%;
+    height: auto;
+  }
+  .compare-button{
+    background-color: #311528 !important;
+    color: white !important;
+  }
+  </style>
   <div class="container">
     <div class="row">
       <!-- Filters Column -->
@@ -70,8 +70,8 @@
       <!-- Products Column -->
       <div class="col-md-9">
         <div class="form-group mt-3 mb-3">
-          <label for="filterOption1">Sort By:</label>
-          <select class="form-control" id="filterOption1">
+          <select class="form-control w-25 p-2" id="filterOption1">
+            <option value="option">Sort By</option>
             <option value="option1">Price Low to High</option>
             <option value="option2">Price High to Low</option>
             <option value="option3">Name A-Z</option>
@@ -80,7 +80,7 @@
         </div>
         <div class="row">
           <!-- Product 1 -->
-          {% for i in indian_whisky_premium %}
+          {% for i in products %}
           <div class="col-lg-6">
             <div class="product-box">
               <div class="row">
@@ -88,35 +88,21 @@
                     <img src="/media/{{ i.product_image }}" class="product-img" alt="Product 1">
                 </div>
                 <div class="col-md-8">
-                  <h6>{{i.title}}</h6>
-                  <p>{{i.description}}</p>
-                  <p>{{i.price}} Rs</p>
-                  <p>{{i.size}}ML</p>
-                  <form method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="product_id" value="{{ i.id }}">
-                    <button type="submit" class="btn compare-button" data-product-id="{{ i.id }}">Compare</button>
-                  </form>
+                    <h6>{{i.title}}</h6>
+                    <p>{{i.description}}</p>
+                    <p>Rs {{i.price}}</p>
+                    <p>{{i.size}}ML</p>
+                    <button class="btn compare-button">Compare</button>
                 </div>
               </div>
             </div>
           </div>
           {% endfor %}         
         </div>
-
-          {% if table_data %}
-          <h1>Indian Whisky Premium</h1>
-              {{ table_data|safe }}
-              <button onclick="goBack()" class="btn back-button">Back</button>
-          {% endif %}
       </div>
     </div>
   </div>
   
-  <script>
-    function goBack() {
-        window.history.back();
-    }
-</script>
+
 
 {% endblock %}
