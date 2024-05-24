@@ -1,15 +1,36 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from seller.models import Product, Category
 from .models import StatePrice
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpRequest
 
 
 # Create your views here.
-def indian_whisky_blended(request):
-    
 
-    comparison_results = {} 
+def search_suggestions(request):
+    search = request.GET.get('search')
+    payload = []
+    if search:
+        suggestions = Product.objects.filter(title__startswith=search)
+        for s in suggestions:
+            payload.append(s.title)     
+    return JsonResponse({'status': 200,'title': payload})
+
+def product_details(request):
+  title = request.GET.get('title')
+  if title:
+    try:
+      product = Product.objects.get(title=title)
+      # Access product details (e.g., product.description, product.image, etc.)
+      context = {'product': product}  # Create context for product details template
+      return render(request, 'customer/product_details.html', context)
+    except Product.DoesNotExist:
+      return redirect('/error_page/')  # Handle product not found (optional)
+  else:
+    return redirect('/')  # Redirect to search page if no title is provided
     
+    
+def indian_whisky_blended(request):
+    comparison_results = {} 
     if request.method == 'POST' and 'product_id' in request.POST:
         product_id = request.POST['product_id']
         product = Product.objects.get(id=product_id)

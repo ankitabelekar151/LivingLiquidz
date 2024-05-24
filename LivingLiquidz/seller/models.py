@@ -50,15 +50,28 @@ from datetime import datetime
 #     def __str__(self):
 #         return self.title
 
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.CASCADE)
-
+    
     def __str__(self):
         return self.name
     
+class Sub_Category(models.Model):
+    name = models.CharField(max_length=100)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
+    
+class Sub_Sub_Category(models.Model):
+    name = models.CharField(max_length=100)
+    sub_category = models.ForeignKey(Sub_Category, on_delete=models.CASCADE)
+    def __str__(self):
+        return f"{self.sub_category} - {self.name}"
+
+    
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    sub_category = models.ForeignKey(Sub_Category, on_delete=models.CASCADE)
     user = models.ForeignKey(LlUser, on_delete=models.CASCADE, default=None, null=True)
     title = models.CharField(max_length=150,blank=True, null=True)
     description = models.CharField(max_length=255,blank=True, null=True)

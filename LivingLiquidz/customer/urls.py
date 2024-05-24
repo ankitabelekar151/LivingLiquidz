@@ -8,5 +8,6 @@ urlpatterns = [
     path('indian_vodka_plain/',views.indian_vodka_plain,name="indian_vodka_plain"),
     path('imported_vodka_flavoured/',views.imported_vodka_flavoured,name="imported_vodka_flavoured"),
     path('imported_vodka_plain/',views.imported_vodka_plain,name="imported_vodka_plain"),
-    
+    path('search_suggestions/', views.search_suggestions, name='search_suggestions'),
+    path('product_details/', views.product_details, name='product_details'),
 ]
