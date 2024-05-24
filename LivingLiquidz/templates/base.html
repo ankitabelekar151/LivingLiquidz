@@ -4,11 +4,10 @@
 
 <html>
 <head>
-  <title>Liquor Legends</title>
-  <meta name="description" content="">
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Living Legends {% block title %} {% endblock title %}</title>
+  <!-- <title>Living Legends {% block title %} {% endblock title %}</title> -->
   <!-- Add any additional meta tags, stylesheets, or scripts here -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-qx8r5yrdz7h38x8y7fv0js2fzrye6kghcuc7lp1kwcq31p0i93qo9yfkxstf9zp5" crossorigin="anonymous">
   
@@ -32,8 +31,23 @@
       background-color:#976434 !important ;
       border-color: #976434;
     }
-    .br-btn{
+    .br-btn, .txt-clr{
       color: #976434 !important;
+    }
+    .btn-clr{
+      background-color: #976434 !important;
+      color: white;
+      border: 1px solid #976434 !important;
+    }
+    .btn-clr:hover{
+      background-color: white !important;
+      color: #976434 !important;
+    }
+    .bg-clr{
+      background-color: #976434;
+    }
+    a{
+      text-decoration: none;
     }
   </style>
 </head>
@@ -47,51 +61,54 @@
           </button>
           
           <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto gap-0 gap-xl-2">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  SPIRITS
+                  Spirits
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                  <span>INDIAN WHISKY</span>
-                  <span>INDIAN</span>
+                <div class="dropdown-menu p-3 mt-3 w-50" aria-labelledby="navbarDropdown2">
+                  <span class="txt-clr">Indian Whiksy</span>
                     <a class="dropdown-item" href="/indian_whisky_blended/">Blended</a>
                     <a class="dropdown-item" href="/indian_whisky_premium/">Premium</a>
-
-                  <span>VODKA</span>
-                    <span>INDIAN</span>
-                    <a class="dropdown-item" href="/indian_v  odka_flavoured/">Flavoured</a>
+                  <span class="txt-clr">Indian Vodka</span>
+                    <a class="dropdown-item" href="/indian_vodka_flavoured/">Flavoured</a>
                     <a class="dropdown-item" href="/indian_vodka_plain/">Plain</a>
-                  <span>IMPORTED</span>
+                  <span class="txt-clr">Imported</span>
                     <a class="dropdown-item" href="/imported_vodka_flavoured/">Flavoured</a>
                     <a class="dropdown-item" href="/imported_vodka_plain">Plain</a>
+                    <a class="dropdown-item" href="#">View All</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  WINES
-                </a>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" 
+                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Wines</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                  <a class="dropdown-item" href="#">Submenu 1</a>
-                  <a class="dropdown-item" href="#">Submenu 2</a>
+                  <a class="dropdown-item" href="#">Red Wine</a>
+                  <a class="dropdown-item" href="#">White Wine</a>
+                  <a class="dropdown-item" href="#">View All</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  BEERS
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3"
+                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Beers
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                  <a class="dropdown-item" href="#">Submenu 1</a>
-                  <a class="dropdown-item" href="#">Submenu 2</a>
+                  <a class="dropdown-item" href="#">Mild</a>
+                  <a class="dropdown-item" href="#">Strong</a>
+                  <a class="dropdown-item" href="#">Wheat</a>
+                  <a class="dropdown-item" href="#">View All</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  MORE
+                  Wine
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                  <a class="dropdown-item" href="#">Submenu 1</a>
-                  <a class="dropdown-item" href="#">Submenu 2</a>
+                  <a class="dropdown-item" href="#">Rum</a>
+                  <a class="dropdown-item" href="#">Brandy</a>
+                  <a class="dropdown-item" href="#">Scotch</a>
+                  <a class="dropdown-item" href="#">Gin</a>
                 </div>
               </li>
             </ul>
@@ -123,7 +140,7 @@
                     <a class="nav-link" href="/customer_signin/"><i class="bi bi-person-fill fs-3 br-btn"></i>Sign in</a>
                 </li>
                 {% endif %} 
-                <div class="d-flex align-item-center justify-content-center">
+                <div class="d-flex align-item-center ">
                 <button type="button" class="position-relative btn p-0 m-0"><i class="fas fa-shopping-cart fs-4 br-btn"></i>
                   <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="top: 10px;">1</span>
                 </button>
@@ -141,53 +158,53 @@
         {% endblock %}
     </div>
       
-    <footer>
-      <div class="footer1">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-                <h5>About</h5>
-                <p>Some text info about your website.</p>
-                <h6>Follow Us</h6>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-            <div class="col-md-4">
-                <h5>Liquid Legends</h5>
-                <ul class="list-unstyled">
-                    <li><a href="/seller_signup/">Seller Signin</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                    <li><a href="#">Link 4</a></li>
-                    <li><a href="#">Link 5</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h5>Useful Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                    <li><a href="#">Link 4</a></li>
-                    <li><a href="#">Link 5</a></li>
-                </ul>
-            </div>
+  <footer>
+    <div class="footer1">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+              <h5>About</h5>
+              <p>Some text info about your website.</p>
+              <h6>Follow Us</h6>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+          <div class="col-md-4">
+              <h5>Liquid Legends</h5>
+              <ul class="list-unstyled">
+                  <li><a href="/seller_signup/">Seller Signin</a></li>
+                  <li><a href="#">Link 2</a></li>
+                  <li><a href="#">Link 3</a></li>
+                  <li><a href="#">Link 4</a></li>
+                  <li><a href="#">Link 5</a></li>
+              </ul>
+          </div>
+          <div class="col-md-4">
+              <h5>Useful Links</h5>
+              <ul class="list-unstyled">
+                  <li><a href="#">Link 1</a></li>
+                  <li><a href="#">Link 2</a></li>
+                  <li><a href="#">Link 3</a></li>
+                  <li><a href="#">Link 4</a></li>
+                  <li><a href="#">Link 5</a></li>
+              </ul>
           </div>
         </div>
       </div>
-      <div class="footer2">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-              <p>@LIVINGLIQUIDZ,2024. ALL RIGHTS RESERVED</p>
-            </div>
-            <div class="col-md-6">
-              <p>DEVELOPED BY ACCURATE SYSTEMS.</p>
-            </div>
+    </div>
+    <div class="footer2">
+      <div class="container border-top">
+        <div class="row">
+          <div class="col-md-6">
+            <p>@2024 LiqourLEGENDS. ALL RIGHTS RESERVED</p>
+          </div>
+          <div class="col-md-6">
+            <p></p>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </footer>
     
       
 
