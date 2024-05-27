@@ -1,276 +1,175 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Living Legends {% block title %} {% endblock title %}</title>
-    <!-- Add any additional meta tags, stylesheets, or scripts here -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-qx8r5yrdz7h38x8y7fv0js2fzrye6kghcuc7lp1kwcq31p0i93qo9yfkxstf9zp5" crossorigin="anonymous">
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %} {% endblock title %}</title> 
+  <!-- Add any additional meta tags, stylesheets, or scripts here -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-qx8r5yrdz7h38x8y7fv0js2fzrye6kghcuc7lp1kwcq31p0i93qo9yfkxstf9zp5" crossorigin="anonymous">
+  
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300..700&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!--Owl Carousel CSS-->
+  <link rel="stylesheet" href="{% static 'login/css/owl.carousel.min.css' %}">
 
-    <!--Owl Carousel CSS-->
-    <link rel="stylesheet" href="{% static 'login/css/owl.carousel.min.css' %}">
-
-    <!--FontAwesome CSS-->
-    <link rel="stylesheet" href="{% static 'login/css/all.min.css' %}">
-
-    <!--Custom CSS-->
-    <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
-
-    <style>
-
-    .navbar-brand {
-      font-size: 1.5rem;
+  <!--Custom CSS-->
+  <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
+  <link rel="icon" type="favicon" href="../media/upload_products/favicon.png">
+  <style>
+    *{
+      font-family: 'Montserrat';
     }
-    .search-box {
-      width: 400px;
+    .search-btn{
+      background-color:#976434 !important ;
+      border-color: #976434;
     }
-    @media (max-width: 768px) {
-      .search-box {
-        width: 100%;
-      }
+    .br-btn, .txt-clr{
+      color: #976434 !important;
     }
-    /* Custom Navbar Background Color */
-    .navbar-custom {
-      background-color: #311528 !important;
+    .btn-clr{
+      background-color: #976434 !important;
+      color: white;
+      border: 1px solid #976434 !important;
     }
-    .navbar-brand,
-    .navbar-nav .nav-link {
-      color: #AE9479 !important;
+    .btn-clr:hover{
+      background-color: white !important;
+      color: #976434 !important;
     }
-    .nav-item {
-        position: relative; 
-      }
-    .cart-counter {
-    position: absolute; 
-    top: 10px;
-    right: -23px; 
-    background-color: red; 
-    color: white; 
-    border-radius: 50%; 
-    padding: 0px 6px;
-    font-size: 0.8rem; 
+    .bg-clr{
+      background-color: #976434;
     }
-    .nav-link {
-    display: inline-block; 
+    a{
+      text-decoration: none;
     }
-    .input-group-append button {
-        border-top-left-radius: 0 !important;
-        border-bottom-left-radius: 0 !important;
-    }
-    .slider-image {
-        width: 100%;
-        height: 500px;
-        object-fit: cover; 
-    }
-    .card{
-        margin-top: 35px;
-    }
-    .middle-card {
-        border-radius: 10px;
-        overflow: hidden;
-        margin-bottom: 20px;
-        margin-top: 80px;
-      }
-      
-      .middle-card-img {
-        height: 200px; 
-        background-size: cover;
-        background-position: center;
-      }
-      
-      .middle-card-link {
-        display: block;
-        height: 100%;
-      }
-      .footer1{
-        background-color: #311528;
-        color: #AE9479;
-    }
-    .footer2{
-      background-color: #AE9479;
-      color: #311528;
-  }
-  .card2{
-    padding-bottom:40px;
-  }
-
-
-
-  footer {
-      width: 100%;
-      bottom: 0;
-  }
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-    </style>
+  </style>
 </head>
 <body>
     <header class="main-header">
-        <div class="horizontal-section d-flex align-items-center justify-content-center py-2">
-            <p class="text-center m-0" style="font-size: 16px; font-family: 'Teko', sans-serif;"> WE NEVER ASK FOR ADVANCE PAYMENT.MAKE <b > PAYMENT ONLY AFTER DELIVERY </b> VIA CASH/CARD.FOR QUERY CALL ON @ 
-            <a href="#" style="color: inherit;"> 8830388320 </a> </p>
-        </div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
-            <div class="container">
-              <a class="navbar-brand" href="#">Liquor Legends</a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      SPIRITS
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                      <h6>INDIAN WHISKY<h6>
-                      <p>INDIAN<p>
-                      <a class="dropdown-item" href="/indian_whisky_blended/">Blended</a>
-                      <a class="dropdown-item" href="/indian_whisky_premium/">Premium</a>
-
-                      <h6>VODKA<h6>
-                        <p>INDIAN<p>
-                        <a class="dropdown-item" href="/indian_vodka_flavoured/">Flavoured</a>
-                        <a class="dropdown-item" href="/indian_vodka_plain/">Plain</a>
-                        <p>IMPORTED<p>
-                          <a class="dropdown-item" href="/imported_vodka_flavoured/">Flavoured</a>
-                          <a class="dropdown-item" href="/imported_vodka_plain">Plain</a>
-                    </div>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      WINES
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                      <a class="dropdown-item" href="#">Submenu 1</a>
-                      <a class="dropdown-item" href="#">Submenu 2</a>
-                    </div>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      BEERS
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                      <a class="dropdown-item" href="#">Submenu 1</a>
-                      <a class="dropdown-item" href="#">Submenu 2</a>
-                    </div>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      MORE
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                      <a class="dropdown-item" href="#">Submenu 1</a>
-                      <a class="dropdown-item" href="#">Submenu 2</a>
-                    </div>
-                  </li>
-                </ul>
-                
-                <form class="form-inline my-2 my-lg-0">
-                  <div class="input-group">
-                    <input type="text" class="form-control search-box" placeholder="Search">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button" style="background-color: #AE9479 !important;">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-                <ul class="navbar-nav ml-auto position-relative">
-                  {% if request.user.is_authenticated and request.user.is_customer %} 
-                    <!-- If user is logged in -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #AE9479 !important;">
-                            Welcome,{{ request.user.first_name}}</br>
-                            My Account
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/customer_logout/">Logout</a>
-                            <!-- Add other dropdown items here -->
-                        </div>
-                    </li>
-                    {% else %}
-                    <!-- If user is not logged in -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/customer_signin/" style="color: #AE9479 !important;">Sign In</a>
-                    </li>
-                    {% endif %} 
-              
-                    <li class="nav-item position-relative">
-                      <a class="nav-link" href="#" style="color: #AE9479 !important; position: relative;">
-                        <i class="fas fa-shopping-cart"></i> 
-                        <span class="cart-counter">1</span>
-                      </a>
-                    </li>
-                  </ul>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+        <div class="container">
+          <a class="navbar-brand" href="/"><img src="../media/upload_products/Logo.png" alt="Liquor Legends" width="150"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav mr-auto gap-0 gap-xl-2">
+              {% for cat in category %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{cat.name}}
+                </a>
+                <div class="dropdown-menu p-3 mt-3 w-50" aria-labelledby="navbarDropdown2">
+                  {% for sub in cat.sub_category_set.all %}
+                  <span class="txt-clr">{{ sub.name }}</span>
+                    {% for sub_sub in sub.sub_sub_category_set.all %}
+                      <a class="dropdown-item" href="{% url 'category_products' sub_sub.id %}">{{ sub_sub.name }}</a>
+                    {% endfor %}
+                  {% endfor %}
+                </div>   
+              </li>
+              {% endfor %}
+            </ul>
+            
+            <form class="form-inline my-2 my-lg-0">
+              <div class="input-group">
+                <input type="text" class="form-control search-box" placeholder="Search">
+                <button class="btn btn-secondary search-btn" type="button">
+                  <i class="fas fa-search"></i>
+                </button>
               </div>
-            </div>
-        </nav>    
-    </header>
+            </form>
+            <ul class="navbar-nav ml-auto position-relative">
+              {% if request.user.is_authenticated and request.user.is_customer %} 
+                <!-- If user is logged in -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #AE9479 !important;">
+                        Welcome,{{ request.user.first_name}}</br>
+                        My Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/customer_logout/">Logout</a>
+                        <!-- Add other dropdown items here -->
+                    </div>
+                </li>
+                {% else %}
+                <!-- If user is not logged in -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/customer_signin/"><i class="bi bi-person-fill fs-3 br-btn"></i>Sign in</a>
+                </li>
+                {% endif %} 
+                <div class="d-flex align-item-center ">
+                <button type="button" class="position-relative btn p-0 m-0"><i class="fas fa-shopping-cart fs-4 br-btn"></i>
+                  <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="top: 10px;">1</span>
+                </button>
+              </div>
+                </li>
+              </ul>
+          </div>
+        </div>
+    </nav>    
+  </header>
     
-    <div class="content">
-        {% block content %}
+  <div class="content">
+      {% block content %}
+    
+      {% endblock %}
+  </div>
       
-        {% endblock %}
+  <footer>
+    <div class="footer1">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+              <h5>About</h5>
+              <p>Some text info about your website.</p>
+              <h6>Follow Us</h6>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+          <div class="col-md-4">
+              <h5>Liquid Legends</h5>
+              <ul class="list-unstyled">
+                  <li><a href="/seller_signup/">Seller Signin</a></li>
+                  <li><a href="#">Link 2</a></li>
+                  <li><a href="#">Link 3</a></li>
+                  <li><a href="#">Link 4</a></li>
+                  <li><a href="#">Link 5</a></li>
+              </ul>
+          </div>
+          <div class="col-md-4">
+              <h5>Useful Links</h5>
+              <ul class="list-unstyled">
+                  <li><a href="#">Link 1</a></li>
+                  <li><a href="#">Link 2</a></li>
+                  <li><a href="#">Link 3</a></li>
+                  <li><a href="#">Link 4</a></li>
+                  <li><a href="#">Link 5</a></li>
+              </ul>
+          </div>
+        </div>
+      </div>
     </div>
-      
-    <footer>
-      <div class="footer1">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-                <h5>About</h5>
-                <p>Some text info about your website.</p>
-                <h6>Follow Us</h6>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-            <div class="col-md-4">
-                <h5>Liquid Legends</h5>
-                <ul class="list-unstyled">
-                    <li><a href="/seller_signup/">Seller Signin</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                    <li><a href="#">Link 4</a></li>
-                    <li><a href="#">Link 5</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h5>Useful Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                    <li><a href="#">Link 4</a></li>
-                    <li><a href="#">Link 5</a></li>
-                </ul>
-            </div>
+    <div class="footer2">
+      <div class="container border-top">
+        <div class="row">
+          <div class="col-md-6">
+            <p>@2024 LiqourLEGENDS. ALL RIGHTS RESERVED</p>
+          </div>
+          <div class="col-md-6">
+            <p></p>
           </div>
         </div>
       </div>
-      <div class="footer2">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-              <p>@LIVINGLIQUIDZ,2024. ALL RIGHTS RESERVED</p>
-            </div>
-            <div class="col-md-6">
-              <p>DEVELOPED BY ACCURATE SYSTEMS.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+    </div>
+  </footer>
     
       
 
@@ -292,3 +191,6 @@
     <script src="{% static 'login/js/myscript.js' %}"></script>
 </body>
 </html>
+
+
+
