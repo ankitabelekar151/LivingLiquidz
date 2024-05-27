@@ -97,3 +97,6 @@ def imported_vodka_plain(request):
         'imported_vodka_plain':imported_vodka_plain
     }
     return render(request, 'customer/imported_vodka_plain.html',context)
+
+def whisky(request):
+    return render(request, 'customer/whisky.html')

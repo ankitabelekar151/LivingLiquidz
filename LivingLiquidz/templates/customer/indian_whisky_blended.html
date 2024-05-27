@@ -57,11 +57,11 @@
           <div class="form-group mt-2">
             <label for="filterBrand">Brand:</label>
             <div class="form-check">
-              <input type="checkbox" value="Royal Stag" class="form-check-input">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="brand">
               <label for="" class="form-check-label">Royal Stag</label>
             </div>
             <div class="form-check">
-              <input type="checkbox" value="Royal Stag" class="form-check-input">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="brand">
               <label for="" class="form-check-label">MC Dowells</label>
             </div>
           </div>
@@ -69,11 +69,11 @@
           <div class="form-group mt-2">
             <label for="filterSize">Size:</label>
             <div class="form-check">
-              <input type="checkbox" value="Royal Stag" class="form-check-input">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="size">
               <label for="" class="form-check-label">180ml</label>
             </div>
             <div class="form-check">
-              <input type="checkbox" value="Royal Stag" class="form-check-input">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="size">
               <label for="" class="form-check-label">375ml</label>
             </div>
           </div>
@@ -84,7 +84,7 @@
       <!-- Products Column -->
       <div class="col-md-9">
         <div class=" mt-3 mb-3 d-flex justify-content-end align-items-center gap-2">
-          <span>Showing 5 Products</span>
+          <span>Showing <span id="prod_count"></span> Products</span>
           <select class="form-select" id="sorttable" style="width: 250px;">
             <option value="">Sort By</option>
             <option value="LTH">Price Low to High</option>
@@ -96,28 +96,30 @@
         <div class="row gap-3 d-flex justify-content-center">
           <!-- Product 1 -->
           {% for i in indian_whisky_blended %}
-          <div class="col-lg-6 row p-2 border rounded" data-title="{{ i.title }}" data-price="{{ i.price }}" data-brand="{{ i.brand }}" data-size="{{ i.size }}">
-            <div class="col-4 col-md-4 col-xl-4">
-                <img src="/media/{{ i.product_image }}" class="product-img" alt="Product 1">
-            </div>
-            <div class="col-8 col-md-8 col-xl-8 p-body">
-              <div>
-                <h3>{{i.title}}</h3>
-                <div style="font-size: 15px;">{{i.description}}</div>
-                <div>Rs {{i.price}}</div>
-                <div>
-                {% for s in i.get_sizes %}
-                  <button class="btn btn-sm btn-outline-secondary" onclick="showPrice('{{ s.size }}')">{{ s.size }}</button>
-                {% endfor %}
-                </div>
+          <div class="prodbox1 col-lg-6 row d-flex justify-content-center" data-title="{{ i.title }}" data-price="{{ i.price }}" data-brand="{{ i.brand }}" data-size="{{ i.size }}">
+            <div class="row border rounded p-2 pt-3 pb-3">
+              <div class="col-4 col-md-4 col-xl-4">
+                  <img src="/media/{{ i.product_image }}" class="product-img" alt="Product 1">
               </div>
-              <form method="post">
-                {% csrf_token %}
-                <input type="hidden" name="product_id" value="{{ i.id }}">
-                <button type="submit" class="btn btn-sm btn-clr mt-2" data-product-id="{{ i.id }}" 
-                  data-bs-toggle="modal" data-bs-target="#exampleModal">Compare
-                </button>
-              </form>
+              <div class="col-8 col-md-8 col-xl-8 p-body">
+                <div>
+                  <h3>{{i.title}}</h3>
+                  <div style="font-size: 15px;">{{i.description}}</div>
+                  <div id="prod_price{{i.id}}">Rs {{i.price}}</div>
+                  <div>
+                  {% for s in i.get_sizes %}
+                    <button class="btn btn-sm btn-outline-secondary" onclick="showPrice('{{ s.price }}','prod_price{{i.id}}')">{{ s.size }}</button>
+                  {% endfor %}
+                  </div>
+                </div>
+                <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="product_id" value="{{ i.id }}">
+                  <button type="submit" class="btn btn-sm btn-clr mt-2" data-product-id="{{ i.id }}" 
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">Compare
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
           {% endfor %} 
@@ -134,6 +136,9 @@
               </div>
               <div class="modal-body" id="compareBx">
                 <!--content -->
+                {% if table_data %}
+                  {{ table_data|safe }}
+                {% endif %} 
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -142,28 +147,21 @@
           </div>
         </div>
         <!--Modal End-->
-        {% if table_data %}
-          {{ table_data|safe }}
-        {% endif %}  
+        
       </div>
     </div>
   </div>
-  <script>
-    function showPrice(size) {
-        // Iterate over all sizes passed from Django template
-        {% for size in product.get_sizes %}
-            // Check if the current size matches the selected size
-            {% if size.size == size %}
-                var price = {{ size.price }};
-                document.getElementById("compareBx").innerText = "Price: " + price;
-                return; // Exit the function after finding the price
-            {% endif %}
-        {% endfor %}
-        // If the size is not found, display "N/A"
-        document.getElementById("compareBx").innerText = "Price: N/A";
-    }
-</script>
+
 <script>
+  function showPrice(price,pid) {
+    //Change price by size
+      var priceDiv = document.getElementById(pid);
+      priceDiv.innerHTML = 'Rs ' + price;
+  }
+</script>
+
+<script>
+  //Sort Table
   document.getElementById('sorttable').addEventListener('change', function() {
     const sortBy = this.value;
     const productsContainer = document.querySelector('.row.gap-3');
@@ -181,11 +179,12 @@
       }
       return 0;
     });
-  
     products.forEach(product => productsContainer.appendChild(product));
   });
   </script>
+  
   <script>
+    //filters
     document.addEventListener('DOMContentLoaded', function() {
       const priceRange = document.getElementById('filterPrice');
       const minPriceDisplay = document.getElementById('minPrice');
@@ -194,7 +193,9 @@
       const sizeCheckboxes = document.querySelectorAll('input[type="checkbox"][name="size"]');
       
       function updatePriceRange() {
-        const products = document.querySelectorAll('.col-lg-6');
+        const products = document.querySelectorAll('.prodbox1');
+        const prodcount = document.getElementById("prod_count");
+        prodcount.innerHTML=products.length;
         let prices = Array.from(products).map(product => parseFloat(product.dataset.price));
         
         if (prices.length > 0) {
@@ -212,7 +213,7 @@
         const selectedPrice = parseFloat(priceRange.value);
         const selectedBrands = Array.from(brandCheckboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
         const selectedSizes = Array.from(sizeCheckboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-        const products = document.querySelectorAll('.col-lg-6');
+        const products = document.querySelectorAll('.prodbox1');
         
         document.getElementById("priceValue").innerHTML=priceRange.value;
         products.forEach(product => {

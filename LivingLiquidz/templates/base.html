@@ -47,6 +47,24 @@
     a{
       text-decoration: none;
     }
+    .footer-section{
+      background-color: #976434;
+      background-image: url("../media/upload_products/footer-bg.png");
+      background-repeat: no-repeat;
+      background-position: left;
+      background-size: cover;
+      padding: 40px 20px 20px 20px;
+      margin-top: 10px;
+      color: white;
+    }
+    .footer-section a{
+      color: white;
+    }
+    .footer-section h5{
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
@@ -100,7 +118,7 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Wine
+                  More
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
                   <a class="dropdown-item" href="#">Rum</a>
@@ -134,15 +152,15 @@
                 </li>
                 {% else %}
                 <!-- If user is not logged in -->
-                <li class="nav-item">
-                    <a class="nav-link" href="/customer_signin/"><i class="bi bi-person-fill fs-3 br-btn"></i>Sign in</a>
+                <li class="nav-item d-flex align-item-center">
+                    <a class="nav-link" href="/customer_signin/"><i class="bi bi-person-fill fs-3 br-btn"></i><span>Sign in</span></a>
                 </li>
                 {% endif %} 
-                <div class="d-flex align-item-center ">
-                <button type="button" class="position-relative btn p-0 m-0"><i class="fas fa-shopping-cart fs-4 br-btn"></i>
-                  <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="top: 10px;">1</span>
-                </button>
-              </div>
+                <!-- <div class="d-flex align-item-center ">
+                  <button type="button" class="position-relative btn p-0 m-0"><i class="fas fa-shopping-cart fs-4 br-btn"></i>
+                    <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="top: 10px;">1</span>
+                  </button>
+                </div> -->
                 </li>
               </ul>
           </div>
@@ -156,48 +174,64 @@
         {% endblock %}
     </div>
       
-  <footer>
+  <footer class="footer-section">
     <div class="footer1">
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
-              <h5>About</h5>
-              <p>Some text info about your website.</p>
-              <h6>Follow Us</h6>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
+
+          <div class="col-md-3">
+            <img src="../media/upload_products/logo-footer.png" alt="footer logo" width="200">
+            <h5 class="mt-3">Follow Us:</h5>
+            <div>
+              <a href="#"><i class="bi bi-facebook fs-3 text-white me-2"></i></a>
+              <a href="#"><i class="fab fa-twitter fs-3 text-white me-2"></i></a>
+              <a href="#"><i class="fab fa-instagram fs-3 text-white me-2"></i></a>
+            </div>
           </div>
-          <div class="col-md-4">
-              <h5>Liquid Legends</h5>
-              <ul class="list-unstyled">
-                  <li><a href="/seller_signup/">Seller Signin</a></li>
-                  <li><a href="#">Link 2</a></li>
-                  <li><a href="#">Link 3</a></li>
-                  <li><a href="#">Link 4</a></li>
-                  <li><a href="#">Link 5</a></li>
-              </ul>
+
+          <div class="col-md-3 mt-2">
+            <h5>Liquor Legends</h5>
+            <ul class="list-unstyled">
+                <li><a href="#">Spirits</a></li>
+                <li><a href="#">Wine</a></li>
+                <li><a href="#">Beer</a></li>
+                <li><a href="#">Whisky</a></li>
+                <li><a href="#">Rum</a></li>
+                <li><a href="#">Scotch</a></li>
+            </ul>
           </div>
-          <div class="col-md-4">
-              <h5>Useful Links</h5>
-              <ul class="list-unstyled">
-                  <li><a href="#">Link 1</a></li>
-                  <li><a href="#">Link 2</a></li>
-                  <li><a href="#">Link 3</a></li>
-                  <li><a href="#">Link 4</a></li>
-                  <li><a href="#">Link 5</a></li>
-              </ul>
+
+          <div class="col-md-3 mt-2">
+            <h5>Useful Links</h5>
+            <ul class="list-unstyled">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Bulk Order</a></li>
+                <li><a href="/seller_signup/">Seller Signin</a></li>
+            </ul>
           </div>
+
+          <div class="col-md-3 mt-2">
+            <h5>Support</h5>
+            <ul class="list-unstyled">
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
     <div class="footer2">
       <div class="container border-top">
         <div class="row">
-          <div class="col-md-6">
-            <p>@2024 LiqourLEGENDS. ALL RIGHTS RESERVED</p>
+          <div class="col-md-6 mt-1">
+            <p style="font-size: 15px;">@2024 Liqour Legends. All Rights Reserved</p>
           </div>
-          <div class="col-md-6">
-            <p></p>
+          <div class="col-md-6 mt-1">
+            
           </div>
         </div>
       </div>
