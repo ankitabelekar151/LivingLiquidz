@@ -6,16 +6,22 @@ import random
 from .models import LlUser, customer_user, seller_user
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from seller.models import Category
+from seller.models import Category,Sub_Category,Sub_Sub_Category
 
 
 def home(request):
-
-    return render(request, 'home_page.html')
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+    
+    context = {'category':category,
+               'sub_category':sub_category,
+               'sub_sub_category':sub_sub_category
+               }
+    return render(request, 'home_page.html',context)
 
 def generate_otp():
     return ''.join(random.choices('0123456789', k=6))
-
 
 def customer_signup(request):
     if request.method == "POST":
