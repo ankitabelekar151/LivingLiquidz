@@ -42,4 +42,53 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+    
 
+class StatePrice(models.Model):
+    STATES = (
+        ('MAHARASHTRA', 'Maharashtra'),
+        ('BIHAR', 'Bihar'),
+        ('ANDHRA PRADESH', 'Andhra Pradesh'),
+        ('KARNATAKA', 'Karnataka'),
+        ('CHATTISGARH', 'Chhattisgarh'),
+        ('ARUNACHAL PRADESH', 'Arunachal Pradesh'),
+        ('ASSAM', 'Assam'),
+        ('MANIPUR', 'Manipur'),
+        ('GUJARAT', 'Gujarat'),
+        ('KERALA', 'Kerala'),
+        ('HIMACHAL PRADESH', 'Himachal Pradesh'),
+        ('JHARKHAND', 'Jharkhand'),
+        ('GOA', 'Goa'),
+        ('PUNJAB', 'Punjab'),
+        ('MIZORAM', 'Mizoram'),
+        ('ODISHA', 'Odisha'),
+        ('NAGALAND', 'Nagaland'),
+        ('MADHYA PRADESH', 'Madhya Pradesh'),
+        ('TAMIL NADU', 'Tamil Nadu'),
+        ('UTTAR PRADESH', 'Uttar Pradesh'),
+        ('SIKKIM', 'Sikkim'),
+        ('MEGHALAYA', 'Meghalaya'),
+        ('TELANGANA', 'Telangana'),
+        ('UTTARAKHAND', 'Uttarakhand'),
+        ('TRIPURA', 'Tripura'),
+        ('HARAYANA', 'Haryana'),
+        ('WEST BENGAL', 'West Bengal'),
+        ('RAJASTHAN', 'Rajasthan'),
+        ('DELHI', 'Delhi'),
+        ('JAMMU & KASHMIR', 'Jammu & Kashmir'),
+        
+    )
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='state_prices')
+    state = models.CharField(max_length=20, choices=STATES)
+    size_90ml = models.FloatField(null=True, blank=True)
+    size_180ml = models.FloatField(null=True, blank=True)
+    size_375ml = models.FloatField(null=True, blank=True)
+    size_750ml = models.FloatField(null=True, blank=True)
+    size_1ltr = models.FloatField(null=True, blank=True)
+    size_2000ml = models.FloatField(null=True, blank=True)
+
+    class Meta:
+        unique_together = ('product', 'state')
+
+    def __str__(self):
+        return f"{self.product.title} - {self.state}"

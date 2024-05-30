@@ -85,14 +85,42 @@
             <div class="product-box">
               <div class="row">
                 <div class="col-md-4">
-                    <img src="/media/{{ i.product_image }}" class="product-img" alt="Product 1">
+                    <img src="/media/{{ i.product_image }}" class="product-img" alt="{{ i.title }}">
                 </div>
                 <div class="col-md-8">
                     <h6>{{i.title}}</h6>
                     <p>{{i.description}}</p>
-                    <p>Rs {{i.price}}</p>
-                    <p>{{i.size}}ML</p>
-                    <button class="btn compare-button">Compare</button>
+                    <select id="state-select-{{ i.id }}" onchange="updatePrice({{ i.id }})">
+                      {% for state_price in state_prices %}
+                          {% if state_price.product.id == i.id %}
+                              <option value="{{ state_price.state }}">{{ state_price.state }}</option>
+                          {% endif %}
+                      {% endfor %}
+                  </select>
+                  <div id="price-details-{{ i.id }}">
+                    {% for j in state_prices %}
+                    {% if j.product.id == i.id %}
+                    <div data-state="{{ j.state }}" style="{% if forloop.first %}display:block;{% else %}display:none;{% endif %}">
+                      <p>90 ML: {{ j.size_90ml }}</p>
+                      <p>180 ML: {{ j.size_180ml }}</p>
+                      <p>375 ML: {{ j.size_375ml }}</p>
+                      <p>750 ML: {{ j.size_750ml }}</p>
+                      <p>1 LTR: {{ j.size_1ltr }}</p>
+                      <p>2000 ML: {{ j.size_2000ml }}</p>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                  <div class="buttons-container">
+                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_90ml')">90 ML</button>
+                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_180ml')">180 ML</button>
+                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_375ml')">375 ML</button>
+                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_750ml')">750 ML</button>
+                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_1ltr')">1 LTR</button>
+                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_2000ml')">2000 ML</button>
+                  </div>
+                    
+                  {% comment %} <a href="{% url 'product_details' i.id %}" class="btn compare-button">Compare</a> {% endcomment %}
                 </div>
               </div>
             </div>
@@ -102,7 +130,44 @@
       </div>
     </div>
   </div>
-  
+  <script>
+    function updatePrice(productId) {
+        const stateSelect = document.getElementById(`state-select-${productId}`);
+        const selectedState = stateSelect.value;
+        const priceDetails = document.getElementById(`price-details-${productId}`);
+        const allPrices = priceDetails.querySelectorAll('[data-state]');
 
+        allPrices.forEach(price => {
+            if (price.getAttribute('data-state') === selectedState) {
+                price.style.display = 'block';
+            } else {
+                price.style.display = 'none';
+            }
+        });
+    }
 
+    // Display the first available state's prices by default
+    document.addEventListener("DOMContentLoaded", function() {
+        const products = document.querySelectorAll('[id^=state-select-]');
+        products.forEach(product => {
+            const productId = product.id.split('-')[2];
+            const stateSelect = document.getElementById(`state-select-${productId}`);
+            if (stateSelect.options.length > 0) {
+                const selectedState = stateSelect.options[0].value;
+                const priceDetails = document.getElementById(`price-details-${productId}`);
+                const allPrices = priceDetails.querySelectorAll('[data-state]');
+
+                allPrices.forEach(price => {
+                    if (price.getAttribute('data-state') === selectedState) {
+                        price.style.display = 'block';
+                    } else {
+                        price.style.display = 'none';
+                    }
+                });
+
+                stateSelect.selectedIndex = 0;
+            }
+        });
+    });
+</script>    
 {% endblock %}
