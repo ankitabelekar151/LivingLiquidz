@@ -5,83 +5,112 @@
 {% block content %}
 {% load static %}
 
-
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category</title>
+  <meta name="description" content="">
+  <meta name="keyword" content="">
+  <link rel="canonical" href="">
+  <style>
   .container {
       margin-top: 20px; /* Adjust the value as needed */
     }
   /* Custom styles for product boxes */
   .product-box {
-    border: 1px solid #ccc;
+    border: 1px solid #f0f0f0;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 20px 10px 20px 10px;
+    border-radius: 10px;
   }
   .product-img {
     max-width: 100%;
     height: auto;
   }
   .compare-button{
-    background-color: #311528 !important;
-    color: white !important;
+    background-color: var(--color);
+    color: #ffffff;
+  }
+  .compare-button:hover{
+    border: 1px solid var(--color);
+    color: var(--color);
+  }
+  h1{font-size: 25px;text-align: center;border-bottom: 1px solid #eeeeee; padding: 10px;}
+  h3{font-size: 18px;}
+  .description{font-size: 14px;}
+  .meta-detail{font-size: 16px;}
+  @media screen and (max-width:800px){
+    .filters-col{
+      display: none;
+    }
   }
   </style>
+</head>
+<body>
   <div class="container">
+    <h1>{{sub_sub_category}}</h1>
     <div class="row">
       <!-- Filters Column -->
-      <div class="col-md-3">
+      <div class="col-md-3 filters-col" >
         <div class="filters-box">
-          <h2>Filters</h2>
+          <h2 class="fs-4 mt-2">Filters</h2>
           <!-- Add your filter options here -->
-          <div class="form-group">
-            <label for="filterOption1">Filter Option 1:</label>
-            <select class="form-control" id="filterOption1">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </select>
+          <div class="form-group mt-2">
+            <label for="filterPrice">Price: <span id="priceValue"></span><span> Rs</span></label>
+            <input type="range" class="form-range" id="filterPrice" style="accent-color: var(--color) !important;">
+            <div class="d-flex justify-content-between">
+              <span id="minPrice"></span>
+              <span id="maxPrice"></span>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="filterOption2">Filter Option 2:</label>
-            <select class="form-control" id="filterOption2">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </select>
+
+          <div class="form-group mt-2">
+            <label for="filterBrand">Brand:</label>
+            <div class="form-check">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="brand">
+              <label for="" class="form-check-label">Royal Stag</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="brand">
+              <label for="" class="form-check-label">MC Dowells</label>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="filterOption2">Filter Option 2:</label>
-            <select class="form-control" id="filterOption2">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </select>
+
+          <div class="form-group mt-2">
+            <label for="filterSize">Size:</label>
+            <div class="form-check">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="size">
+              <label for="" class="form-check-label">180ml</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="size">
+              <label for="" class="form-check-label">375ml</label>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="filterOption2">Filter Option 2:</label>
-            <select class="form-control" id="filterOption2">
-              <option value="option1">Option 1</option>
-              <option value="option2">Option 2</option>
-              <option value="option3">Option 3</option>
-            </select>
-          </div>
+
           <!-- Add more filter options as needed -->
         </div>
       </div>
       <!-- Products Column -->
       <div class="col-md-9">
-        <div class="form-group mt-3 mb-3">
-          <select class="form-control w-25 p-2" id="filterOption1">
-            <option value="option">Sort By</option>
-            <option value="option1">Price Low to High</option>
-            <option value="option2">Price High to Low</option>
-            <option value="option3">Name A-Z</option>
-            <option value="option3">Name Z-A</option>
+        <div class=" mt-3 mb-3 d-flex justify-content-end align-items-center gap-2">
+          <span>Showing <span id="prod_count"></span> Products</span>
+          <select class="form-select" id="sorttable" style="width: 250px;">
+            <option value="">Sort By</option>
+            <option value="LTH">Price Low to High</option>
+            <option value="HTL">Price High to Low</option>
+            <option value="AZ">Name A-Z</option>
+            <option value="ZA">Name Z-A</option>
           </select>
         </div>
-        <div class="row">
+
+        <div class="row gap-3 d-flex justify-content-center">
           <!-- Product 1 -->
           {% for i in products %}
-          <div class="col-lg-6">
+          <div class="prodbox1 col-lg-6 row d-flex justify-content-center" data-title="{{ i.title }}" data-price="{{ i.price }}" data-brand="{{ i.brand }}" data-size="{{ i.size }}">
             <div class="product-box">
               <div class="row">
                 <div class="col-md-4">
@@ -127,47 +156,47 @@
           </div>
           {% endfor %}         
         </div>
+
+         <!-- Modal -->
+         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title fs-5" id="exampleModalLabel">Comparison Table</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Modal End-->
+
       </div>
     </div>
   </div>
+
   <script>
     function updatePrice(productId) {
-        const stateSelect = document.getElementById(`state-select-${productId}`);
-        const selectedState = stateSelect.value;
-        const priceDetails = document.getElementById(`price-details-${productId}`);
-        const allPrices = priceDetails.querySelectorAll('[data-state]');
-
-        allPrices.forEach(price => {
-            if (price.getAttribute('data-state') === selectedState) {
-                price.style.display = 'block';
+        var stateSelect = document.getElementById('state-select-' + productId);
+        var selectedState = stateSelect.value;
+        var priceDetails = document.getElementById('price-details-' + productId);
+        var divs = priceDetails.querySelectorAll('div[data-state]');
+    
+        divs.forEach(function(div) {
+            if (div.getAttribute('data-state') === selectedState) {
+                div.style.display = 'block';
             } else {
-                price.style.display = 'none';
+                div.style.display = 'none';
             }
         });
     }
+    </script>
+    
+    
+</body>
+</html>  
 
-    // Display the first available state's prices by default
-    document.addEventListener("DOMContentLoaded", function() {
-        const products = document.querySelectorAll('[id^=state-select-]');
-        products.forEach(product => {
-            const productId = product.id.split('-')[2];
-            const stateSelect = document.getElementById(`state-select-${productId}`);
-            if (stateSelect.options.length > 0) {
-                const selectedState = stateSelect.options[0].value;
-                const priceDetails = document.getElementById(`price-details-${productId}`);
-                const allPrices = priceDetails.querySelectorAll('[data-state]');
-
-                allPrices.forEach(price => {
-                    if (price.getAttribute('data-state') === selectedState) {
-                        price.style.display = 'block';
-                    } else {
-                        price.style.display = 'none';
-                    }
-                });
-
-                stateSelect.selectedIndex = 0;
-            }
-        });
-    });
-</script>    
 {% endblock %}

@@ -21,10 +21,8 @@ def category_products(request,id):
     sub_sub_category = Sub_Sub_Category.objects.get(id=id)
     products = Product.objects.filter(sub_sub_category__name=sub_sub_category.name)
 
-    # Get state prices for the products
+    
     state_prices = StatePrice.objects.filter(product__in=products)
-    # for i in state_prices:
-    #     print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',i.state,i.size_90ml)
 
     context = {
         'category':category,
