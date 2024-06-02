@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block title %} whisky blended {% endblock %}
+
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Indian Whisky- Blended</title>
+  <meta name="description" content="">
+  <meta name="keyword" content="">
+  <link rel="canonical" href="">
+  <style>
+      .container {
+          margin-top: 20px; /* Adjust the value as needed */
+        }
+      /* Custom styles for product boxes */
+      .product-box {
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        padding: 10px;
+      }
+      .product-img {
+        max-width: 100%;
+        height: auto;
+      }
+      h3{
+        font-size: 18px;
+      }
+      .p-body{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+<body>
+  <div class="container">
+    <div class="row">
+      <!-- Filters Column -->
+      <div class="col-md-3">
+        <div class="filters-box">
+          <h2 class="fs-3 mt-2">Filters</h2>
+          <!-- Add your filter options here -->
+          <div class="form-group mt-2">
+            <label for="filterPrice">Price: <span id="priceValue"></span><span> Rs</span></label>
+            <input type="range" class="form-range" id="filterPrice">
+            <div class="d-flex justify-content-between">
+              <span id="minPrice"></span>
+              <span id="maxPrice"></span>
+            </div>
+          </div>
+
+          <div class="form-group mt-2">
+            <label for="filterBrand">Brand:</label>
+            <div class="form-check">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="brand">
+              <label for="" class="form-check-label">Royal Stag</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="brand">
+              <label for="" class="form-check-label">MC Dowells</label>
+            </div>
+          </div>
+
+          <div class="form-group mt-2">
+            <label for="filterSize">Size:</label>
+            <div class="form-check">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="size">
+              <label for="" class="form-check-label">180ml</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" value="Royal Stag" class="form-check-input" name="size">
+              <label for="" class="form-check-label">375ml</label>
+            </div>
+          </div>
+          
+          <!-- Add more filter options as needed -->
+        </div>
+      </div>
+      <!-- Products Column -->
+      <div class="col-md-9">
+        <div class=" mt-3 mb-3 d-flex justify-content-end align-items-center gap-2">
+          <span>Showing <span id="prod_count"></span> Products</span>
+          <select class="form-select" id="sorttable" style="width: 250px;">
+            <option value="">Sort By</option>
+            <option value="LTH">Price Low to High</option>
+            <option value="HTL">Price High to Low</option>
+            <option value="AZ">Name A-Z</option>
+            <option value="ZA">Name Z-A</option>
+          </select>
+        </div>
+        <div class="row gap-3 d-flex justify-content-center">
+          <!-- Product 1 -->
+          {% for i in indian_whisky_blended %}
+          <div class="prodbox1 col-lg-6 row d-flex justify-content-center" data-title="{{ i.title }}" data-price="{{ i.price }}" data-brand="{{ i.brand }}" data-size="{{ i.size }}">
+            <div class="row border rounded p-2 pt-3 pb-3">
+              <div class="col-4 col-md-4 col-xl-4">
+                  <img src="/media/{{ i.product_image }}" class="product-img" alt="Product 1">
+              </div>
+              <div class="col-8 col-md-8 col-xl-8 p-body">
+                <div>
+                  <h3>{{i.title}}</h3>
+                  <div style="font-size: 15px;">{{i.description}}</div>
+                  <div id="prod_price{{i.id}}">Rs {{i.price}}</div>
+                  <div>
+                  {% for s in i.get_sizes %}
+                    <button class="btn btn-sm btn-outline-secondary" onclick="showPrice('{{ s.price }}','prod_price{{i.id}}')">{{ s.size }}</button>
+                  {% endfor %}
+                  </div>
+                </div>
+                <form method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="product_id" value="{{ i.id }}">
+                  <button type="submit" class="btn btn-sm btn-clr mt-2" data-product-id="{{ i.id }}" 
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">Compare
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          {% endfor %} 
+          <!--end product-->        
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title fs-5" id="exampleModalLabel">Comparison Table</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" id="compareBx">
+                <!--content -->
+                {% if table_data %}
+                  {{ table_data|safe }}
+                {% endif %} 
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Modal End-->
+        
+      </div>
+    </div>
+  </div>
+
+<script>
+  function showPrice(price,pid) {
+    //Change price by size
+      var priceDiv = document.getElementById(pid);
+      priceDiv.innerHTML = 'Rs ' + price;
+  }
+</script>
+
+<script>
+  //Sort Table
+  document.getElementById('sorttable').addEventListener('change', function() {
+    const sortBy = this.value;
+    const productsContainer = document.querySelector('.row.gap-3');
+    const products = Array.from(productsContainer.children);
+  
+    products.sort((a, b) => {
+      if (sortBy === 'LTH') {
+        return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+      } else if (sortBy === 'HTL') {
+        return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+      } else if (sortBy === 'AZ') {
+        return a.dataset.title.localeCompare(b.dataset.title);
+      } else if (sortBy === 'ZA') {
+        return b.dataset.title.localeCompare(a.dataset.title);
+      }
+      return 0;
+    });
+    products.forEach(product => productsContainer.appendChild(product));
+  });
+  </script>
+  
+  <script>
+    //filters
+    document.addEventListener('DOMContentLoaded', function() {
+      const priceRange = document.getElementById('filterPrice');
+      const minPriceDisplay = document.getElementById('minPrice');
+      const maxPriceDisplay = document.getElementById('maxPrice');
+      const brandCheckboxes = document.querySelectorAll('input[type="checkbox"][name="brand"]');
+      const sizeCheckboxes = document.querySelectorAll('input[type="checkbox"][name="size"]');
+      
+      function updatePriceRange() {
+        const products = document.querySelectorAll('.prodbox1');
+        const prodcount = document.getElementById("prod_count");
+        prodcount.innerHTML=products.length;
+        let prices = Array.from(products).map(product => parseFloat(product.dataset.price));
+        
+        if (prices.length > 0) {
+          const minPrice = Math.min(...prices);
+          const maxPrice = Math.max(...prices);
+          minPriceDisplay.textContent = minPrice;
+          maxPriceDisplay.textContent = maxPrice;
+          priceRange.min = minPrice;
+          priceRange.max = maxPrice;
+          priceRange.value = maxPrice;
+        }
+      }
+    
+      function filterProducts() {
+        const selectedPrice = parseFloat(priceRange.value);
+        const selectedBrands = Array.from(brandCheckboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+        const selectedSizes = Array.from(sizeCheckboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+        const products = document.querySelectorAll('.prodbox1');
+        
+        document.getElementById("priceValue").innerHTML=priceRange.value;
+        products.forEach(product => {
+          const productPrice = parseFloat(product.dataset.price);
+          const productBrand = product.dataset.brand;
+          const productSize = product.dataset.size;
+    
+          const matchesPrice = productPrice <= selectedPrice;
+          const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(productBrand);
+          const matchesSize = selectedSizes.length === 0 || selectedSizes.includes(productSize);
+    
+          if (matchesPrice && matchesBrand && matchesSize) {
+            product.style.display = '';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+      }
+    
+      priceRange.addEventListener('input', filterProducts);
+      brandCheckboxes.forEach(checkbox => checkbox.addEventListener('change', filterProducts));
+      sizeCheckboxes.forEach(checkbox => checkbox.addEventListener('change', filterProducts));
+    
+      updatePriceRange();
+      filterProducts();
+    });
+    </script>
+        
+</body>
+</html>
+{% endblock %}

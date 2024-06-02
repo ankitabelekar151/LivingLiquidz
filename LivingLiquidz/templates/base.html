@@ -22,36 +22,450 @@
   <!--Custom CSS-->
   <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
   <link rel="icon" type="favicon" href="../media/upload_products/favicon.png">
+  
+  <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+  <link   rel="stylesheet"   href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css" />
+  <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   <style>
+    :root{
+      --color: #5B000A;
+      --navbg: #f1f1f1;
+    }
     *{
       font-family: 'Montserrat';
     }
     .search-btn{
-      background-color:#976434 !important ;
-      border-color: #976434;
+      background-color:var(--color) !important ;
+      border-color: var(--color);
     }
     .br-btn, .txt-clr{
-      color: #976434 !important;
+      color: var(--color) !important;
     }
     .btn-clr{
-      background-color: #976434 !important;
+      background-color: var(--color) !important;
       color: white;
-      border: 1px solid #976434 !important;
+      border: 1px solid var(--color) !important;
     }
     .btn-clr:hover{
       background-color: white !important;
-      color: #976434 !important;
+      color: var(--color) !important;
     }
     .bg-clr{
-      background-color: #976434;
+      background-color: var(--color);
     }
     a{
       text-decoration: none;
     }
+    .footer-section{
+      background-color: var(--color);
+      background-image: url("../media/upload_products/footer-bg.png");
+      background-repeat: no-repeat;
+      background-position: left;
+      background-size: cover;
+      padding: 40px 20px 20px 20px;
+      margin-top: 10px;
+      color: white;
+    }
+    .footer-section a{
+      color: white;
+    }
+    .footer-section h5{
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+    }
   </style>
+  <style>
+   
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+nav{
+  position: sticky;
+  top: 0px;
+  z-index: 2;
+  width: 100%;
+  padding: 10px;
+  background: var(--navbg);
+}
+nav .wrapper{
+  position: relative;
+  max-width: 1300px;
+  padding: 0px 30px;
+  height: 70px;
+  line-height: 70px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wrapper .nav-links{
+  display: inline-flex;
+}
+.nav-links li{
+  list-style: none;
+}
+.nav-links li a{
+  color: #202020;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.desktop-item{
+  padding: 10px 20px;
+}
+.nav-links li a:hover{
+  background: #e0e0e0;
+}
+.nav-links .mobile-item{
+  display: none;
+}
+.nav-links .drop-menu{
+  position: absolute;
+  background: #242526;
+  width: 180px;
+  line-height: 45px;
+  top: 85px;
+  opacity: 0;
+  visibility: hidden;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+.nav-links li:hover .drop-menu,
+.nav-links li:hover .mega-box{
+  transition: all 0.3s ease;
+  top: 70px;
+  opacity: 1;
+  visibility: visible;
+}
+.drop-menu li a{
+  width: 100%;
+  display: block;
+  padding: 0 0 0 15px;
+  font-weight: 400;
+  border-radius: 0px;
+}
+.mega-box{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 0 30px;
+  top: 85px;
+  opacity: 0;
+  visibility: hidden;
+}
+.mega-box .content{
+  background: var(--navbg);
+  padding: 25px 20px;
+  display: flex;
+  width: auto;
+  height: 65vh;
+  overflow: auto;
+  justify-content: space-between;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+.mega-box .content .row{
+  width: calc(22% - 30px);
+  line-height: 28px;
+  flex-direction: column;
+}
+.content .row img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.content .row header{
+  color: #f2f2f2;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 15px;
+}
+.content .row .mega-links{
+  margin-left: -40px;
+  border-left: 1px solid rgba(255,255,255,0.09);
+}
+.row .mega-links li{
+  padding: 0 20px;
+}
+.row .mega-links li a{
+  padding: 0px;
+  padding: 0 20px;
+  color: #d9d9d9;
+  font-size: 17px;
+  display: block;
+}
+.row .mega-links li a:hover{
+  color: #f2f2f2;
+}
+.wrapper .btn{
+  color: var(--color);
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  background-color: var(--navbg);
+}
+.wrapper .btn.close-btn{
+  position: absolute;
+  right: 30px;
+  top: 10px;
+}
+
+@media screen and (max-width: 970px) {
+  .wrapper .btn{
+    display: block;
+  }
+  .wrapper .nav-links{
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    max-width: 350px;
+    top: 0;
+    left: -100%;
+    background: #242526;
+    display: block;
+    padding: 50px 10px;
+    line-height: 50px;
+    overflow-y: auto;
+    box-shadow: 0px 15px 15px rgba(0,0,0,0.18);
+    transition: all 0.3s ease;
+  }
+  /* custom scroll bar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #242526;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3A3B3C;
+  }
+  #menu-btn:checked ~ .nav-links{
+    left: 0%;
+  }
+  #menu-btn:checked ~ .btn.menu-btn{
+    display: none;
+  }
+  #close-btn:checked ~ .btn.menu-btn{
+    display: block;
+  }
+  .nav-links li{
+    margin: 15px 10px;
+  }
+  .nav-links li a{
+    padding: 0 20px;
+    display: block;
+    font-size: 20px;
+  }
+  .nav-links .drop-menu{
+    position: static;
+    opacity: 1;
+    top: 65px;
+    visibility: visible;
+    padding-left: 20px;
+    width: 100%;
+    max-height: 0px;
+    overflow: hidden;
+    box-shadow: none;
+    transition: all 0.3s ease;
+  }
+  #showDrop:checked ~ .drop-menu,
+  #showMega:checked ~ .mega-box{
+    max-height: 100%;
+  }
+  .nav-links .desktop-item{
+    display: none;
+  }
+  .nav-links .mobile-item{
+    display: block;
+    color: #f2f2f2;
+    font-size: 20px;
+    font-weight: 500;
+    padding-left: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  .nav-links .mobile-item:hover{
+    background: #3A3B3C;
+  }
+  .drop-menu li{
+    margin: 0;
+  }
+  .drop-menu li a{
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  .mega-box{
+    position: static;
+    top: 65px;
+    opacity: 1;
+    visibility: visible;
+    padding: 0 20px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .mega-box .content{
+    box-shadow: none;
+    flex-direction: column;
+    padding: 20px 20px 0 20px;
+  }
+  .mega-box .content .row{
+    width: 100%;
+    margin-bottom: 15px;
+    border-top: 1px solid rgba(207, 188, 188, 0.08);
+  }
+  .mega-box .content .row:nth-child(1),
+  .mega-box .content .row:nth-child(2){
+    border-top: 0px;
+  }
+  .content .row .mega-links{
+    border-left: 0px;
+    padding-left: 15px;
+  }
+  .row .mega-links li{
+    margin: 0;
+  }
+  .content .row header{
+    font-size: 19px;
+  }
+}
+nav input{
+  display: none;
+}
+
+.body-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  padding: 0 30px;
+}
+.body-text div{
+  font-size: 45px;
+  font-weight: 600;
+}
+  </style>
+  
 </head>
 <body>
-    <header class="main-header">
+  <nav>
+    <div class="wrapper">
+      <div class="logo"><a href="/"><img src="../media/upload_products/Logo.png" alt="Liquor Legends" width="150"></a></div>
+      <input type="radio" name="slider" id="menu-btn">
+      <input type="radio" name="slider" id="close-btn">
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+
+        {% for cat in category %}
+        <li>
+          <a class="desktop-item">{{cat.name}} <i class="fa fa-angle-down"></i></a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">{{cat.name}}</label>
+          <div class="mega-box" >
+            <div class="content">
+              <div class="row">
+                {% for sub in cat.sub_category_set.all %}
+                  <header class="txt-clr">{{ sub.name }}</header>
+                  {% for sub_sub in sub.sub_sub_category_set.all %}
+                  <a class="" href="{% url 'category_products' sub_sub.id %}" target="_blank">{{ sub_sub.name }}</a>
+                  {% endfor %}
+                {% endfor %}
+            </div>
+            </div>
+          </div>   
+        </li>
+        {% endfor %}
+        <li>
+          <a href="#" class="desktop-item">Category</a>
+          <input type="checkbox" id="showMega">
+          <label for="showMega" class="mobile-item">Mega Menu</label>
+          <div class="mega-box">
+            <div class="content align-items-baseline justify-content-center">
+              <div class="border rounded h-auto p-2 m-2">
+                <a href="#">
+                  <img src="../media/categories/beer.jpg" alt="" width="200px">
+                  <header class="txt-clr text-center">Beer</header>
+                </a>
+              </div>
+              <div class="border rounded h-auto p-2 m-2">
+                <a href="#">
+                  <img src="../media/categories/vodka.jpg" alt="" width="200px">
+                  <header class="txt-clr text-center">Vodka</header>
+                </a>
+              </div>
+              <div class="border rounded h-auto p-2 m-2">
+                <a href="#">
+                  <img src="../media/categories/whisky.jpg" alt="" width="200px">
+                  <header class="txt-clr text-center">Whisky</header>
+                </a>
+              </div>
+              <div class="border rounded h-auto p-2 m-2">
+                <a href="#">
+                  <img src="../media/categories/wine.jpg" alt="" width="200px">
+                  <header class="txt-clr text-center">Wine</header>
+                </a>
+              </div>
+          </div>
+        </li>
+      </ul>
+
+      <div id="autocomplete" class="autocomplete">
+        <input class="autocomplete-input" />
+        <ul id="ull" class="autocomplete-result-list" style="color:red;"></ul>
+      </div> 
+
+      {% comment %} <form class="form-inline ">
+        <div class="input-group">
+          <input type="text" class="form-control " placeholder="Search">
+          <button class="btn search-btn" type="button">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </form> {% endcomment %}
+
+      <ul class="navbar-nav ml-auto position-relative">
+        {% if request.user.is_authenticated and request.user.is_customer %} 
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #AE9479 !important;">
+                  Welcome,{{ request.user.first_name}}</br>
+                  My Account
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="/customer_logout/">Logout</a>
+              </div>
+          </li>
+          {% else %}
+          <li class="nav-item d-flex align-item-center">
+              <a class="nav-link" href="/customer_signin/"><i class="bi bi-person-fill fs-3 br-btn"></i><span>Sign in</span></a>
+          </li>
+          {% endif %}  
+
+          <!-- <div class="d-flex align-item-center ">
+            <button type="button" class="position-relative btn p-0 m-0"><i class="fas fa-shopping-cart fs-4 br-btn"></i>
+              <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="top: 10px;">1</span>
+            </button>
+          </div> -->
+
+          </li>
+        </ul>
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+  </nav>
+  
+
+    <!-- <header class="main-header">
       <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
         <div class="container">
           <a class="navbar-brand" href="/"><img src="../media/upload_products/Logo.png" alt="Liquor Legends" width="150"></a>
@@ -70,7 +484,7 @@
                   {% for sub in cat.sub_category_set.all %}
                   <span class="txt-clr">{{ sub.name }}</span>
                     {% for sub_sub in sub.sub_sub_category_set.all %}
-                      <a class="dropdown-item" href="{% url 'category_products' sub_sub.id %}">{{ sub_sub.name }}</a>
+                      <a class="dropdown-item" href="{% url 'category_products' sub_sub.id %}" target="_blank">{{ sub_sub.name }}</a>
                     {% endfor %}
                   {% endfor %}
                 </div>   
@@ -88,7 +502,6 @@
             </form>
             <ul class="navbar-nav ml-auto position-relative">
               {% if request.user.is_authenticated and request.user.is_customer %} 
-                <!-- If user is logged in -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #AE9479 !important;">
                         Welcome,{{ request.user.first_name}}</br>
@@ -96,26 +509,26 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="/customer_logout/">Logout</a>
-                        <!-- Add other dropdown items here -->
                     </div>
                 </li>
                 {% else %}
-                <!-- If user is not logged in -->
-                <li class="nav-item">
-                    <a class="nav-link" href="/customer_signin/"><i class="bi bi-person-fill fs-3 br-btn"></i>Sign in</a>
+                <li class="nav-item d-flex align-item-center">
+                    <a class="nav-link" href="/customer_signin/"><i class="bi bi-person-fill fs-3 br-btn"></i><span>Sign in</span></a>
                 </li>
-                {% endif %} 
-                <div class="d-flex align-item-center ">
-                <button type="button" class="position-relative btn p-0 m-0"><i class="fas fa-shopping-cart fs-4 br-btn"></i>
-                  <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="top: 10px;">1</span>
-                </button>
-              </div>
-                </li>
+                {% endif %}  -->
+
+                <!-- <div class="d-flex align-item-center ">
+                  <button type="button" class="position-relative btn p-0 m-0"><i class="fas fa-shopping-cart fs-4 br-btn"></i>
+                    <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="top: 10px;">1</span>
+                  </button>
+                </div> -->
+
+                <!-- </li>
               </ul>
           </div>
         </div>
     </nav>    
-  </header>
+  </header> -->
     
   <div class="content">
       {% block content %}
@@ -123,56 +536,69 @@
       {% endblock %}
   </div>
       
-  <footer>
+  <footer class="footer-section">
     <div class="footer1">
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
-              <h5>About</h5>
-              <p>Some text info about your website.</p>
-              <h6>Follow Us</h6>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
+
+          <div class="col-md-3">
+            <img src="../media/upload_products/logo-footer.png" alt="footer logo" width="200">
+            <h5 class="mt-3">Follow Us:</h5>
+            <div>
+              <a href="#"><i class="bi bi-facebook fs-3 text-white me-2"></i></a>
+              <a href="#"><i class="fab fa-twitter fs-3 text-white me-2"></i></a>
+              <a href="#"><i class="fab fa-instagram fs-3 text-white me-2"></i></a>
+            </div>
           </div>
-          <div class="col-md-4">
-              <h5>Liquid Legends</h5>
-              <ul class="list-unstyled">
-                  <li><a href="/seller_signup/">Seller Signin</a></li>
-                  <li><a href="#">Link 2</a></li>
-                  <li><a href="#">Link 3</a></li>
-                  <li><a href="#">Link 4</a></li>
-                  <li><a href="#">Link 5</a></li>
-              </ul>
+
+          <div class="col-md-3 mt-2">
+            <h5>Liquor Legends</h5>
+            <ul class="list-unstyled">
+                <li><a href="#">Spirits</a></li>
+                <li><a href="#">Wine</a></li>
+                <li><a href="#">Beer</a></li>
+                <li><a href="#">Whisky</a></li>
+                <li><a href="#">Rum</a></li>
+                <li><a href="#">Scotch</a></li>
+            </ul>
           </div>
-          <div class="col-md-4">
-              <h5>Useful Links</h5>
-              <ul class="list-unstyled">
-                  <li><a href="#">Link 1</a></li>
-                  <li><a href="#">Link 2</a></li>
-                  <li><a href="#">Link 3</a></li>
-                  <li><a href="#">Link 4</a></li>
-                  <li><a href="#">Link 5</a></li>
-              </ul>
+
+          <div class="col-md-3 mt-2">
+            <h5>Useful Links</h5>
+            <ul class="list-unstyled">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Bulk Order</a></li>
+                <li><a href="/seller_signup/">Seller Signin</a></li>
+            </ul>
           </div>
+
+          <div class="col-md-3 mt-2">
+            <h5>Support</h5>
+            <ul class="list-unstyled">
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
     <div class="footer2">
       <div class="container border-top">
         <div class="row">
-          <div class="col-md-6">
-            <p>@2024 LiqourLEGENDS. ALL RIGHTS RESERVED</p>
+          <div class="col-md-6 mt-1">
+            <p style="font-size: 15px;">@2024 Liqour Legends. All Rights Reserved</p>
           </div>
-          <div class="col-md-6">
-            <p></p>
+          <div class="col-md-6 mt-1">
+            
           </div>
         </div>
       </div>
     </div>
   </footer>
-    
-      
-
 
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>

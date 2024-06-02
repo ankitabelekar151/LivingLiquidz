@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from seller.models import Product, Category,Sub_Category,Sub_Sub_Category
-from django.http import JsonResponse,HttpRequest
+from seller.models import Product, Category,Sub_Category,Sub_Sub_Category,StatePrice
+from django.http import JsonResponse,HttpRequest,HttpResponseNotFound
 
 
 # Create your views here.
@@ -20,27 +20,35 @@ def category_products(request,id):
     sub_category = Sub_Category.objects.all()
     sub_sub_category = Sub_Sub_Category.objects.get(id=id)
     products = Product.objects.filter(sub_sub_category__name=sub_sub_category.name)
+
+    
+    state_prices = StatePrice.objects.filter(product__in=products)
+
     context = {
         'category':category,
         'sub_category':sub_category,
         'sub_sub_category': sub_sub_category,
-        'products': products
+        'products': products,
+        'state_prices': state_prices,
     }
     return render(request,'customer/category_products.html',context)
 
 
-def product_details(request):
-  title = request.GET.get('title')
-  if title:
-    try:
-      product = Product.objects.get(title=title)
-      # Access product details (e.g., product.description, product.image, etc.)
-      context = {'product': product}  # Create context for product details template
-      return render(request, 'customer/product_details.html', context)
-    except Product.DoesNotExist:
-      return redirect('/error_page/')  # Handle product not found (optional)
-  else:
-    return redirect('/')  # Redirect to search page if no title is provided
+def product_details(request,id):
+  
+    # try:
+    #     product = Product.objects.get(id=id)
+    #     size_price = SizePrice.objects.get(product=product)
+    # except SizePrice.DoesNotExist:
+    #     size_price = None 
+    # except Product.DoesNotExist:
+    #     return HttpResponseNotFound("Product not found")
+
+    # context = {'product': product,
+    #            'size_price':size_price}  
+
+    return render(request, 'customer/product_details.html')
+
     
 # def indian_whisky_blended(request):
 #     comparison_results = {} 
