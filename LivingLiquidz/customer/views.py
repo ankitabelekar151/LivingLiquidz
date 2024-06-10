@@ -9,10 +9,12 @@ def search_suggestions(request):
     search = request.GET.get('search')
     payload = []
     if search:
-        suggestions = Product.objects.filter(title__startswith=search)
+        suggestions = Product.objects.filter(title__icontains=search)
+        # for i in suggestions:
+        #  print('kkkkkkkkkkkkkkkkkkkkkkkkk',i.id,i.title)
         for s in suggestions:
-            payload.append(s.title)     
-    return JsonResponse({'status': 200,'title': payload})
+            payload.append({'id': s.id, 'title': s.title})     
+    return JsonResponse({'status': 200,'payload': payload})
 
     
 def category_products(request,id):
@@ -35,19 +37,27 @@ def category_products(request,id):
 
 
 def product_details(request,id):
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.get(id=id)
   
-    # try:
-    #     product = Product.objects.get(id=id)
-    #     size_price = SizePrice.objects.get(product=product)
-    # except SizePrice.DoesNotExist:
-    #     size_price = None 
-    # except Product.DoesNotExist:
-    #     return HttpResponseNotFound("Product not found")
+    try:
+        product = Product.objects.get(id=id)
+        state_price = StatePrice.objects.filter(product=product)
+    except StatePrice.DoesNotExist:
+        state_price = None 
+    except Product.DoesNotExist:
+        return HttpResponseNotFound("Product not found")
 
-    # context = {'product': product,
-    #            'size_price':size_price}  
+    context = {
+               'category':category,
+               'sub_category':sub_category,
+               'sub_sub_category':sub_sub_category,
+               'product': product,
+               'state_price':state_price
+               }  
 
-    return render(request, 'customer/product_details.html')
+    return render(request, 'customer/product_details.html',context)
 
     
 # def indian_whisky_blended(request):

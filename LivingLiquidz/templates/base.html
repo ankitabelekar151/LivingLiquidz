@@ -339,9 +339,9 @@ nav .wrapper{
     font-size: 19px;
   }
 }
-nav input{
+{% comment %} nav input{
   display: none;
-}
+} {% endcomment %}
 
 .body-text{
   position: absolute;
@@ -356,7 +356,7 @@ nav input{
   font-size: 45px;
   font-weight: 600;
 }
-  </style>
+</style>
   
 </head>
 <body>
@@ -421,10 +421,16 @@ nav input{
         </li>
       </ul>
 
-      <div id="autocomplete" class="autocomplete">
-        <input class="autocomplete-input" />
-        <ul id="ull" class="autocomplete-result-list" style="color:red;"></ul>
-      </div> 
+
+      <div class="form-inline">
+				<div class="input-group">
+				  <div id="autocomplete" class="autocomplete">
+					<input type="text" class="autocomplete-input" />
+					<ul id="ull" class="autocomplete-result-list"></ul>
+				  </div>
+				</div>
+			</div> 
+
 
       {% comment %} <form class="form-inline ">
         <div class="input-group">
@@ -615,6 +621,83 @@ nav input{
     <script src="{% static 'login/js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'login/js/all.min.js' %}"></script>
     <script src="{% static 'login/js/myscript.js' %}"></script>
+
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+    <script>
+      let productMap = {};  // A mapping of titles to IDs
+    
+      new Autocomplete('#autocomplete', {
+        search: input => {
+          const url = `/search_suggestions/?search=${input}`;
+          return new Promise(resolve => {
+            fetch(url).then(response => response.json()).then(data => {
+              productMap = {};  // Clear the previous mappings
+              const titles = data.payload.map(item => {
+                productMap[item.title] = item.id;  // Populate the mapping
+                return item.title;  // Return only the title for the suggestions
+              });
+              resolve(titles);  // Resolve with titles only
+            });
+          });
+        },
+        onSubmit: function(result) {
+          const productId = productMap[result];  // Get the ID from the map
+          if (productId) {
+            window.location.href = `/product_details/${productId}`;  // Redirect to details page
+          }
+        }
+      });
+    
+      $('#ull').click(function (e) {
+        const productId = productMap[$('#autocomplete').val()];  // Get the ID from the map
+        if (productId) {
+          $.ajax({
+            url: '',
+            type: 'GET',
+            data: {
+              valname: productId,
+            },
+            success: function (response) {
+              window.location = response.urlLink;
+            }
+          });
+        }
+      });
+    </script>
+    
+    {% comment %} <script>
+      var title;
+      new Autocomplete('#autocomplete', {
+        search: input => {
+        const url = `/search_suggestions/?search=${input}`;
+        return new Promise(resolve => {
+        fetch(url).then(response => response.json()).then(data => {
+                  //console.log('Search results:', data.payload); // Check if search results are logged correctly
+                  resolve(data.title);
+                })
+        })
+      },
+      onSubmit: function(result) {
+        title = result;
+        window.location.href = `/product_details/?title=${title}`; // Redirect to details page
+      }
+      });
+      $('#ull').click(function (e) {
+        $.ajax({
+        url:'',
+        type: 'GET',
+        data:{
+          valname : title,
+    
+        },
+        success: function (response) {
+          window.location = response.urlLink;
+        }
+        })
+      })
+    
+     </script> {% endcomment %}
+  
 </body>
 </html>
 

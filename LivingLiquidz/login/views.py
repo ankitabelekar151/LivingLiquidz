@@ -6,17 +6,19 @@ import random
 from .models import LlUser, customer_user, seller_user
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from seller.models import Category,Sub_Category,Sub_Sub_Category
+from seller.models import Category,Sub_Category,Sub_Sub_Category,Product
 
 
 def home(request):
     category = Category.objects.all()
     sub_category = Sub_Category.objects.all()
     sub_sub_category = Sub_Sub_Category.objects.all()
+    product = Product.objects.all()
     
     context = {'category':category,
                'sub_category':sub_category,
-               'sub_sub_category':sub_sub_category
+               'sub_sub_category':sub_sub_category,
+               'product':product,
                }
     return render(request, 'home_page.html',context)
 

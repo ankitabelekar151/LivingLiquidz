@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{sub_sub_category}}{% endblock %} 
+{% block title %} {{sub_sub_category.name}} {% endblock %} 
 
 {% block content %}
 {% load static %}
@@ -111,45 +111,25 @@
           <!-- Product 1 -->
           {% for i in products %}
           <div class="prodbox1 col-lg-6 row d-flex justify-content-center" data-title="{{ i.title }}" data-price="{{ i.price }}" data-brand="{{ i.brand }}" data-size="{{ i.size }}">
+            
             <div class="product-box">
               <div class="row">
                 <div class="col-md-4">
+                  <a href="{% url 'product_details' i.id %}">
                     <img src="/media/{{ i.product_image }}" class="product-img" alt="{{ i.title }}">
+                  </a>
                 </div>
+                
                 <div class="col-md-8">
+                  <a href="{% url 'product_details' i.id %}">
                     <h6>{{i.title}}</h6>
-                    <p>{{i.description}}</p>
-                    <select id="state-select-{{ i.id }}" onchange="updatePrice({{ i.id }})">
-                      {% for state_price in state_prices %}
-                          {% if state_price.product.id == i.id %}
-                              <option value="{{ state_price.state }}">{{ state_price.state }}</option>
-                          {% endif %}
-                      {% endfor %}
-                  </select>
-                  <div id="price-details-{{ i.id }}">
-                    {% for j in state_prices %}
-                    {% if j.product.id == i.id %}
-                    <div data-state="{{ j.state }}" style="{% if forloop.first %}display:block;{% else %}display:none;{% endif %}">
-                      <p>90 ML: {{ j.size_90ml }}</p>
-                      <p>180 ML: {{ j.size_180ml }}</p>
-                      <p>375 ML: {{ j.size_375ml }}</p>
-                      <p>750 ML: {{ j.size_750ml }}</p>
-                      <p>1 LTR: {{ j.size_1ltr }}</p>
-                      <p>2000 ML: {{ j.size_2000ml }}</p>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                </div>
-                  <div class="buttons-container">
-                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_90ml')">90 ML</button>
-                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_180ml')">180 ML</button>
-                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_375ml')">375 ML</button>
-                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_750ml')">750 ML</button>
-                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_1ltr')">1 LTR</button>
-                    <button class="btn btn-primary" onclick="updatePrice({{ i.id }}, 'size_2000ml')">2000 ML</button>
-                  </div>
-                    
-                  {% comment %} <a href="{% url 'product_details' i.id %}" class="btn compare-button">Compare</a> {% endcomment %}
+                  </a>
+                  <p>{{i.description}}</p>
+                  
+
+                  
+                  
+                {% comment %} <a href="{% url 'product_details' i.id %}" class="btn compare-button">Compare</a> {% endcomment %}
                 </div>
               </div>
             </div>
