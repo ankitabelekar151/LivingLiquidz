@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us{% endblock %} 
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="canonical" href="">
+
+    <style>
+        h1{
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+            color: #ffffff;
+        }
+        h2{
+            font-size: 20px;
+            font-weight: 500;
+        }
+        p{
+            font-size: 14px;
+            text-align: justify;
+        }
+        body{
+            background-color: var(--bgcolor);
+        }
+        .head-sec{
+            background-color: var(--color);
+            padding: 20px;
+            min-height: 200px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="head-sec">
+        <h1>Contact Us</h1>
+    </div>
+    <div class="container">
+        <div>
+            <h2>Welcome to Liquor Legends</h2>
+            <p>At Liquor Legends, we believe that the world of fine beverages is one to be explored and celebrated. Our mission is to provide our customers with an exceptional selection of wines, whiskies, vodkas, beers, and other spirits from the finest producers around the globe. Whether you're a seasoned connoisseur or a casual enthusiast, we aim to make your journey through the world of liquor enjoyable and memorable.</p>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

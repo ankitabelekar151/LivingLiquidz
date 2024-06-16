@@ -36,18 +36,28 @@ def category_products(request,id):
 
 def product_details(request,id):
   
-    # try:
-    #     product = Product.objects.get(id=id)
-    #     size_price = SizePrice.objects.get(product=product)
-    # except SizePrice.DoesNotExist:
-    #     size_price = None 
-    # except Product.DoesNotExist:
-    #     return HttpResponseNotFound("Product not found")
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.get(id=id)
+  
+    try:
+        product = Product.objects.get(id=id)
+        state_price = StatePrice.objects.filter(product=product)
+    except StatePrice.DoesNotExist:
+        state_price = None 
+    except Product.DoesNotExist:
+        return HttpResponseNotFound("Product not found")
 
-    # context = {'product': product,
-    #            'size_price':size_price}  
+    context = {
+               'category':category,
+               'sub_category':sub_category,
+               'sub_sub_category':sub_sub_category,
+               'product': product,
+               'state_price':state_price
+               }  
+ 
 
-    return render(request, 'customer/product_details.html')
+    return render(request, 'customer/product_details.html',context)
 
     
 # def indian_whisky_blended(request):
@@ -100,3 +110,29 @@ def product_details(request,id):
 #         }
 #     return render(request, 'customer/indian_whisky_premium.html',context)
 
+def whisky(request):
+    return render(request,'customer/whisky.html')
+
+def wine(request):
+    return render(request,'customer/wine.html')
+
+def vodka(request):
+    return render(request,'customer/vodka.html')
+
+def beer(request):
+    return render(request,'customer/beer.html')
+
+def about(request):
+    return render(request,'customer/otherPages/about.html')
+
+def contact(request):
+    return render(request,'customer/otherPages/contact.html')
+
+def privacyPolicy(request):
+    return render(request,'customer/otherPages/privacyPolicy.html')
+
+def termsConditions(request):
+    return render(request,'customer/otherPages/termsConditions.html')
+
+def faq(request):
+    return render(request,'customer/otherPages/faq.html')
