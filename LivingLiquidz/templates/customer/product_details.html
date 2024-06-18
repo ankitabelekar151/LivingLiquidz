@@ -37,7 +37,38 @@
             <div class="col-md-6">
                 <h6>{{product.title}}</h6>
                 <p>{{product.description}}</p>
-                <p>Rs <span id="product-price"></p>
+                <h3>State Prices</h3>
+                {% if state_price %}
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>State</th>
+                                <th>90ml</th>
+                                <th>180ml</th>
+                                <th>375ml</th>
+                                <th>750ml</th>
+                                <th>1ltr</th>
+                                <th>2000ml</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for price in state_price %}
+                                <tr>
+                                    <td>{{ price.state }}</td>
+                                    <td>{{ price.size_90ml }}</td>
+                                    <td>{{ price.size_180ml }}</td>
+                                    <td>{{ price.size_375ml }}</td>
+                                    <td>{{ price.size_750ml }}</td>
+                                    <td>{{ price.size_1ltr }}</td>
+                                    <td>{{ price.size_2000ml }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No state prices available for this product.</p>
+                {% endif %}
+                {% comment %} <p>Rs <span id="product-price"></p> {% endcomment %}
             </div>
         </div>
     </div>
