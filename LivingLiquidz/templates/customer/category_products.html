@@ -23,7 +23,7 @@
     border: 1px solid #f0f0f0;
     box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
-    padding: 20px 10px 20px 10px;
+    padding: 20px 10px;
     border-radius: 10px;
   }
   .product-img {
@@ -38,6 +38,33 @@
     border: 1px solid var(--color);
     color: var(--color);
   }
+  .title{
+    font-size: 18px;
+    font-weight:500;
+    color: #333333;
+  }
+  .description{
+    font-size: 13px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .btn{
+    background-color: #ffffff;
+    color: var(--color);
+    border: 1px solid var(--color);
+  }
+  .btn:hover{
+    background-color: var(--color);
+    color: #ffffff;
+  }
+  .filters-col{
+    border-right: 1px solid #eeeeee;
+  }
+  .modal-dialog{
+    min-width: max-content;
+  }
   h1{font-size: 25px;text-align: center;border-bottom: 1px solid #eeeeee; padding: 10px;}
   h3{font-size: 18px;}
   .description{font-size: 14px;}
@@ -46,58 +73,49 @@
     .filters-col{
       display: none;
     }
+    .modal-dialog{
+    min-width: auto;
+    }
   }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container mb-3">
     <h1>{{sub_sub_category}}</h1>
     <div class="row">
       <!-- Filters Column -->
       <div class="col-md-3 filters-col" >
         <div class="filters-box">
-          <h2 class="fs-4 mt-2">Filters</h2>
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="fs-4 mt-2">Filters</h2>
+            <button class="btn btn-sm" onclick="clearAllFilters()">clear All</button>
+          </div>
           <!-- Add your filter options here -->
           <div class="form-group mt-2">
             <label for="filterPrice">Price: <span id="priceValue"></span><span> Rs</span></label>
-            <input type="range" class="form-range" id="filterPrice" style="accent-color: var(--color) !important;">
+            <input type="range" class="form-range" id="filterPrice" oninput="updatePriceRange()">
             <div class="d-flex justify-content-between">
               <span id="minPrice"></span>
               <span id="maxPrice"></span>
             </div>
           </div>
 
-          <div class="form-group mt-2">
-            <label for="filterBrand">Brand:</label>
-            <div class="form-check">
-              <input type="checkbox" value="Royal Stag" class="form-check-input" name="brand">
-              <label for="" class="form-check-label">Royal Stag</label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" value="Royal Stag" class="form-check-input" name="brand">
-              <label for="" class="form-check-label">MC Dowells</label>
-            </div>
+          <div class="form-group mt-2" id="brand-filters">
+            <label for="filterBrand">Brands:</label>
+            <!-- Brand checkboxes -->
           </div>
-
-          <div class="form-group mt-2">
-            <label for="filterSize">Size:</label>
-            <div class="form-check">
-              <input type="checkbox" value="Royal Stag" class="form-check-input" name="size">
-              <label for="" class="form-check-label">180ml</label>
-            </div>
-            <div class="form-check">
-              <input type="checkbox" value="Royal Stag" class="form-check-input" name="size">
-              <label for="" class="form-check-label">375ml</label>
-            </div>
+          
+          <div class="form-group mt-2" id="size-filters">
+            <label for="filterSize">Sizes:</label>
+            <!-- Size checkboxes -->
           </div>
-
-          <!-- Add more filter options as needed -->
+          
         </div>
       </div>
       <!-- Products Column -->
       <div class="col-md-9">
         <div class=" mt-3 mb-3 d-flex justify-content-end align-items-center gap-2">
-          <span>Showing <span id="prod_count"></span> Products</span>
+          <span> <span id="prod_count"></span> - Items</span>
           <select class="form-select" id="sorttable" style="width: 250px;">
             <option value="">Sort By</option>
             <option value="LTH">Price Low to High</option>
@@ -107,75 +125,238 @@
           </select>
         </div>
 
-        <div class="row gap-3 d-flex justify-content-center">
+        <div class="row" id="products-container">
           <!-- Product 1 -->
           {% for i in products %}
-          <div class="prodbox1 col-lg-6 row d-flex justify-content-center" data-title="{{ i.title }}" data-price="{{ i.price }}" data-brand="{{ i.brand }}" data-size="{{ i.size }}">
-            
+          <div class="prodbox1 col-sm-6 col-md-6 col-xl-6" data-title="{{ i.title }}" data-price="{{ i.price }}" data-brand="{{ i.brand }}" data-size="{{ i.size }}">
             <div class="product-box">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-4 col-sm-4 col-md-4">
                   <a href="{% url 'product_details' i.id %}">
                     <img src="/media/{{ i.product_image }}" class="product-img" alt="{{ i.title }}">
                   </a>
                 </div>
-                
-                <div class="col-md-8">
-                  <a href="{% url 'product_details' i.id %}">
-                    <h6>{{i.title}}</h6>
-                  </a>
-                  <p>{{i.description}}</p>
+                <div class="col-8 col-sm-8 col-md-8 p-body">
+                  <div>
+                    <a href="{% url 'product_details' i.id %}">
+                      <h3 class="title">{{i.title}}</h3>
+                    </a>
+                    <span class="description">{{i.description}}</span>
+                    <div class="mt-2"><span>Price: <b>₹</b></span><span id="showprice"><b>{{ i.price }}</b></span></div>
+                  </div>
+                  <button class="btn compare-button btn-sm float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">Compare</button>
                   
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title fs-5" id="exampleModalLabel">Compare Statewise</h4>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <table class="table table-responsive table-bordered text-center">
+                            <thead>
+                              <tr>
+                                <th>State</th> <th>90ml</th> <th>180ml</th> <th>375ml</th> <th>750ml</th> <th>1L</th> <th>2L</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for j in state_prices %}
+                              {% if j.product.id == i.id %}
+                              <tr>
+                                <td>{{ j.state }}</td>
+                                {% if j.size_90ml %}<td>₹{{ j.size_90ml }}</td> {% else %} <td>-</td> {% endif %}
+                                {% if j.size_180ml %}<td>₹{{ j.size_180ml }}</td> {% else %} <td>-</td> {% endif %}
+                                {% if j.size_375ml %}<td>₹{{ j.size_375ml }}</td> {% else %} <td>-</td> {% endif %}
+                                {% if j.size_750ml %}<td>₹{{ j.size_750ml }}</td> {% else %} <td>-</td> {% endif %}
+                                {% if j.size_1ltr %}<td>₹{{ j.size_1ltr }}</td> {% else %} <td>-</td> {% endif %}
+                                {% if j.size_2000ml %}<td>₹{{ j.size_2000ml }}</td> {% else %} <td>-</td> {% endif %} 
+                              </tr>
+                              {% endif %}
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-                  
-                  
-                {% comment %} <a href="{% url 'product_details' i.id %}" class="btn compare-button">Compare</a> {% endcomment %}
                 </div>
               </div>
             </div>
           </div>
           {% endfor %}         
         </div>
-
-         <!-- Modal -->
-         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h3 class="modal-title fs-5" id="exampleModalLabel">Comparison Table</h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--Modal End-->
-
       </div>
     </div>
   </div>
 
+<script>
+  function updatePrice(productId) {
+      var stateSelect = document.getElementById('state-select-' + productId);
+      var selectedState = stateSelect.value;
+      var priceDetails = document.getElementById('price-details-' + productId);
+      var divs = priceDetails.querySelectorAll('div[data-state]');
+  
+      divs.forEach(function(div) {
+          if (div.getAttribute('data-state') === selectedState) {
+              div.style.display = 'block';
+          } else {
+              div.style.display = 'none';
+          }
+      });
+  }
+  </script>
+
+<script>
+  //Sort Table
+  document.getElementById('sorttable').addEventListener('change', function() {
+    const sortBy = this.value;
+    const productsContainer = document.getElementById('products-container');
+    const products = Array.from(productsContainer.children);
+  
+    products.sort((a, b) => {
+      if (sortBy === 'LTH') {
+        return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+      } else if (sortBy === 'HTL') {
+        return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+      } else if (sortBy === 'AZ') {
+        return a.dataset.title.localeCompare(b.dataset.title);
+      } else if (sortBy === 'ZA') {
+        return b.dataset.title.localeCompare(a.dataset.title);
+      }
+      return 0;
+    });
+    products.forEach(product => productsContainer.appendChild(product));
+  });
+  </script>
   <script>
-    function updatePrice(productId) {
-        var stateSelect = document.getElementById('state-select-' + productId);
-        var selectedState = stateSelect.value;
-        var priceDetails = document.getElementById('price-details-' + productId);
-        var divs = priceDetails.querySelectorAll('div[data-state]');
-    
-        divs.forEach(function(div) {
-            if (div.getAttribute('data-state') === selectedState) {
-                div.style.display = 'block';
-            } else {
-                div.style.display = 'none';
-            }
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+      // Extract unique brands and sizes
+      let products = document.querySelectorAll('.prodbox1');
+      let brands = new Set();
+      let sizes = new Set();
+      let prices = [];
+  
+      products.forEach(product => {
+        brands.add(product.getAttribute('data-brand'));
+        sizes.add(product.getAttribute('data-size'));
+        prices.push(parseFloat(product.getAttribute('data-price')));
+      });
+  
+      // Create checkboxes for brands
+      let brandFilters = document.getElementById('brand-filters');
+      brands.forEach(brand => {
+        let div = document.createElement('div');
+        let checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `brand-${brand}`;
+        checkbox.name = 'brand';
+        checkbox.value = brand;
+        checkbox.className = "form-check-input me-2";
+        checkbox.onclick = filterProducts;
+        let label = document.createElement('label');
+        label.htmlFor = `brand-${brand}`;
+        label.textContent = brand;
+        label.className = "form-check-label";
+        div.appendChild(checkbox);
+        div.appendChild(label);
+        brandFilters.appendChild(div);
+      });
+  
+      // Create checkboxes for sizes
+      let sizeFilters = document.getElementById('size-filters');
+      sizes.forEach(size => {
+        let div = document.createElement('div');
+        let checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `size-${size}`;
+        checkbox.name = 'size';
+        checkbox.value = size;
+        checkbox.className = "form-check-input me-2";
+        checkbox.onclick = filterProducts;
+        let label = document.createElement('label');
+        label.htmlFor = `size-${size}`;
+        label.textContent = size;
+        label.className = "form-check-label";
+        div.appendChild(checkbox);
+        div.appendChild(label);
+        sizeFilters.appendChild(div);
+      });
+  
+      // Set min and max prices
+      let minPrice = Math.min(...prices);
+      let maxPrice = Math.max(...prices);
+      let priceRange = document.getElementById('filterPrice');
+      priceRange.min = minPrice;
+      priceRange.max = maxPrice;
+      priceRange.value = maxPrice;
+      document.getElementById('minPrice').textContent = minPrice;
+      document.getElementById('maxPrice').textContent = maxPrice;
+      document.getElementById('priceValue').textContent = maxPrice;
+  
+      // Filter products based on the selected price range
+      priceRange.addEventListener('input', filterProducts);
+  
+      // Initial product count
+      updateProductCount();
+    });
+  
+    function updatePriceRange() {
+      let priceRange = document.getElementById('filterPrice');
+      document.getElementById('priceValue').textContent = priceRange.value;
+      filterProducts();
     }
-    </script>
-    
-    
+  
+    function filterProducts() {
+      let selectedBrands = Array.from(document.querySelectorAll('#brand-filters input:checked')).map(cb => cb.value);
+      let selectedSizes = Array.from(document.querySelectorAll('#size-filters input:checked')).map(cb => cb.value);
+      let maxPrice = document.getElementById('filterPrice').value;
+  
+      let visibleProducts = 0;
+      document.querySelectorAll('.prodbox1').forEach(function(productBox) {
+        let productBrand = productBox.getAttribute('data-brand');
+        let productSize = productBox.getAttribute('data-size');
+        let productPrice = parseFloat(productBox.getAttribute('data-price'));
+        let brandMatch = selectedBrands.length === 0 || selectedBrands.includes(productBrand);
+        let sizeMatch = selectedSizes.length === 0 || selectedSizes.includes(productSize);
+        let priceMatch = productPrice <= maxPrice;
+  
+        if (brandMatch && sizeMatch && priceMatch) {
+          productBox.style.display = 'block';
+          visibleProducts++;
+        } else {
+          productBox.style.display = 'none';
+        }
+      });
+  
+      // Update product count
+      document.getElementById('prod_count').textContent = visibleProducts;
+    }
+  
+    function updateProductCount() {
+      let productCount = document.querySelectorAll('.prodbox1').length;
+      document.getElementById('prod_count').textContent = productCount;
+    }
+
+    function clearAllFilters() {
+    document.querySelectorAll('#brand-filters input:checked').forEach(checkbox => {
+      checkbox.checked = false;
+    });
+    document.querySelectorAll('#size-filters input:checked').forEach(checkbox => {
+      checkbox.checked = false;
+    });
+    let priceRange = document.getElementById('filterPrice');
+    priceRange.value = priceRange.max; // Reset to maximum price
+    document.getElementById('priceValue').textContent = priceRange.value;
+    filterProducts();
+    }
+
+  </script>    
 </body>
 </html>  
 

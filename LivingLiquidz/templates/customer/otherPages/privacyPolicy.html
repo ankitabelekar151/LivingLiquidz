@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}Privacy Policy{% endblock %} 
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="canonical" href="">
+
+    <style>
+        h1{
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+            color: #ffffff;
+        }
+        h2{
+            font-size: 20px;
+            font-weight: 500;
+        }
+        p{
+            font-size: 14px;
+            text-align: justify;
+        }
+        body{
+            background-color: var(--bgcolor);
+        }
+        .head-sec{
+            background-color: var(--color);
+            padding: 20px;
+            min-height: 200px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="head-sec">
+        <h1>Privacy Policy</h1>
+    </div>
+    <div class="container">
+        <div>
+            <h2>Introduction</h2>
+            <p>Liquor Legends is committed to protecting the privacy and security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, including any other media form, media channel, mobile website, or mobile application related or connected thereto. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.</p>
+            <h2>Information We Collect</h2>
+            <p>We may collect personal information from you when you visit our Site, make a purchase, subscribe to our newsletter, participate in a survey or promotion, or interact with us in other ways. The types of personal information we may collect include:</p>
+            <ul>
+                <li>Contact Information: Name, email address, phone number, shipping address, billing address.</li>
+                <li>Payment Information: Credit card details, PayPal account information.</li>
+                <li>Demographic Information: Age, gender, preferences, interests.</li>
+                <li>Device Information: IP address, browser type, device type, operating system.</li>
+            </ul>
+            <h2>Use of Your Information</h2>
+            <p>We use the information we collect in the following ways:</p>
+            <ul>
+                <li>To process and fulfill your orders, including sending you order confirmations and tracking information.</li>
+                <li>To communicate with you about your orders, account, or inquiries.</li>
+                <li>To send you marketing communications, promotional offers, or newsletters if you have opted-in to receive them.</li>
+                <li>To improve our products, services, and website functionality.</li>
+                <li>To prevent fraud and enhance the security of our website.</li>
+            </ul>
+            <h2>Security of Your Information</h2>
+            <p>We take reasonable measures to protect your personal information from unauthorized access, use, alteration, or destruction. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us:</p>
+            <ul>
+                <li>Email: </li>
+                <li>Phone: </li>
+                <li>Address:</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

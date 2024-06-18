@@ -1,11 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}Whisky{% endblock %} 
+{% block content %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whisky</title>
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="canonical" href="">
+
+    <style>
+        h1{
+            font-size: 30px;
+            text-align: center;
+        }
+        h2{
+            font-size: 20px;
+            font-weight: 500;
+        }
+        p{
+            font-size: 14px;
+            text-align: justify;
+        }
+        .catimg{
+            max-width: 80%;
+        }
+        .head-sec{
+            padding: 20px;
+        }
+        body{
+            background-color: var(--bgcolor);
+        }
+        .cat-btn{
+            background-color: var(--color);
+            color: #ffffff;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>whisky</h1>
+    <div class="container p-2">
+        <div class="head-sec">
+            <h1>The World of Whisky Awaits</h1>
+            <p class="text-center">Explore the rich history and diverse styles of this classic spirit.</p>
+        </div>
+        <div class="p-2 ">
+            <div class="row">
+                <div class=" col-sm-6 col-md-6 col-xl-6 text-center ">
+                    <img src="../../media/categories/whisky.jpg" alt="whisky" class="rounded catimg">
+                </div>
+                <div class="col-sm-6 col-md-6 col-xl-6 ">
+                    <div class="bg-white p-3 rounded shadow-lg">
+                        <div>
+                            <h2 class="mb-2">Domestic</h2>
+                            <div class="d-flex flex-wrap">
+                                <a class="cat-btn" href="/category_products/2" target="_blank">Premium Whisky</a>
+                                <a class="cat-btn" href="/category_products/1" target="_blank">Blended Whisky</a>
+                                <a class="cat-btn" href="#" target="_blank">Red Wines</a>
+                                <a class="cat-btn" href="#" target="_blank">Malt Whisky</a>
+                                <a class="cat-btn" href="#" target="_blank">Single Malt</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-3 mt-3 rounded shadow-lg">
+                        <div>
+                            <h2 class="mb-2">Imported</h2>
+                            <div class="d-flex flex-wrap">
+                                <a class="cat-btn" href="#" target="_blank">Premium Whisky</a>
+                                <a class="cat-btn" href="#" target="_blank">Red Wines</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="container mt-2">
+            <h2>Discover the Finest Whiskies at Liquor Legends</h2>
+            <p>Welcome to Liquor Legends, your ultimate destination for premium whiskies from around the world. Whether you're a seasoned whisky connoisseur or a newcomer exploring the rich and diverse world of whisky, our extensive collection has something to suit every taste. Explore our carefully curated selection of Scotch, Bourbon, Rye, and international whiskies.
+            </p>
+            <h2>Shop Scotch Whisky Online</h2>
+            <p>Indulge in the tradition and complexity of Scotch whisky. From the smoky and peaty single malts of Islay to the smooth and sophisticated blends of the Highlands, our Scotch whisky collection offers a taste for every palate. Perfect for sipping neat, on the rocks, or in a classic cocktail.
+            </p>
+            <p>Popular Scotch Whisky Varieties:</p>
+            <ul style="list-style:circle;">
+                <li>Single Malt Scotch: Made from 100% malted barley at a single distillery, known for its depth and character.</li>
+                <li>Blended Scotch: A mix of single malts and grain whiskies, offering a balanced and approachable taste.</li>
+                <li>Islay Scotch: Famous for its smoky and peaty flavors, ideal for those who love a robust taste.</li>
+                <li>Highland Scotch: Known for its diverse range, from light and floral to rich and full-bodied</li>
+            </ul>
+            <h2>International Whiskies</h2>
+            <p>Expand your horizons with our selection of international whiskies. From the smooth and sophisticated Japanese whiskies to the robust and flavorful Irish whiskies, our collection offers a global journey of taste.
+            </p>
+            <h2>Expert Whisky Tasting Tips</h2>
+            <p>Enhance your whisky experience with our expert tasting tips. Discover the nuances and complexities of different whiskies and learn how to appreciate their unique characteristics.
+            </p>
+        </div>
+    </section>
+
 </body>
 </html>
+{% endblock %}

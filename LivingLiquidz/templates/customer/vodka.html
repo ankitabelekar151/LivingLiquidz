@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block title %}Vodka{% endblock %} 
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="canonical" href="">
+
+    <style>
+        h1{
+            font-size: 30px;
+            text-align: center;
+        }
+        h2{
+            font-size: 20px;
+            font-weight: 500;
+        }
+        p{
+            font-size: 14px;
+            text-align: justify;
+        }
+        .catimg{
+            max-width: 80%;
+        }
+        .head-sec{
+            padding: 20px;
+        }
+        body{
+            background-color: var(--bgcolor);
+        }
+        .cat-btn{
+            background-color: var(--color);
+            color: #ffffff;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container p-2">
+        <div class="head-sec">
+            <h1>The Spirit of Purity: Explore Vodka</h1>
+            <p class="text-center">Discover the clean taste and endless cocktail possibilities.</p>
+        </div>
+        <div class="p-2 ">
+            <div class="row">
+                <div class=" col-sm-6 col-md-6 col-xl-6 text-center ">
+                    <img src="../../media/categories/vodka.jpg" alt="whisky" class="rounded catimg">
+                </div>
+                <div class="col-sm-6 col-md-6 col-xl-6 ">
+                    <div class="bg-white p-3 rounded shadow-lg">
+                        <div>
+                            <h2 class="mb-2">Indian Vodka</h2>
+                            <div class="d-flex flex-wrap">
+                                <a class="cat-btn" href="#" target="_blank">vodka</a>
+                                <a class="cat-btn" href="#" target="_blank">Premium</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-3 mt-3 rounded shadow-lg">
+                        <div>
+                            <h2 class="mb-2">Imported Vodka</h2>
+                            <div class="d-flex flex-wrap">
+                                <a class="cat-btn" href="#" target="_blank">Premium </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="container mt-2">
+            <h2>Discover the Finest Vodkas at Liquor Legends</h2>
+            <p>Welcome to Liquor Legends, your premier destination for a wide selection of premium vodkas. Whether you're a vodka enthusiast or just beginning to explore this versatile spirit, our curated collection offers something for everyone. Explore our extensive range of classic, flavored, and craft vodkas from around the world.
+            </p>
+            <h2>Buy Flavored Vodka Online</h2>
+            <p>Add a twist to your cocktails with our selection of flavored vodkas. From fruity infusions to unique botanical blends, flavored vodkas offer endless possibilities for creative cocktails and mixers.
+            </p>
+            <h2>International Vodkas</h2>
+            <p>Expand your palate with our selection of international vodkas. From the smooth and refined Russian vodkas to the innovative and unique offerings from around the world, our collection has something to suit every taste.
+            </p>
+            <h2>Expert Vodka Tasting Tips</h2>
+            <p>Enhance your vodka experience with our expert tasting tips. Discover the subtle nuances and flavors of different vodkas and learn how to appreciate their unique characteristics.
+            </p>
+            <ul style="list-style: circle;">
+                <li>Look: Observe the clarity and viscosity of the vodka.</li>
+                <li>Smell: Take a moment to inhale the aromas, noting any subtle scents.</li>
+                <li>Taste: Sip and let the vodka coat your palate, identifying different flavors and textures.</li>
+                <li>Finish: Pay attention to the aftertaste, noting how smooth or warming the finish is.</li>
+            </ul>
+        </div>
+    </section>
+
+</body>
+</html>
+{% endblock %}
