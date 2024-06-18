@@ -41,12 +41,13 @@ def product_details(request,id):
     sub_category = Sub_Category.objects.all()
     sub_sub_category = Sub_Sub_Category.objects.get(id=id)
   
-    category = Category.objects.all()
-    sub_category = Sub_Category.objects.all()
-    sub_sub_category = Sub_Sub_Category.objects.get(id=id)
+
+    all_products = Product.objects.exclude(id=id)
   
     try:
         product = Product.objects.get(id=id)
+        sub_sub_category = product.sub_sub_category
+        all_products = Product.objects.filter(sub_sub_category=sub_sub_category).exclude(id=id)
         state_price = StatePrice.objects.filter(product=product)
     except StatePrice.DoesNotExist:
         state_price = None 
@@ -58,7 +59,8 @@ def product_details(request,id):
                'sub_category':sub_category,
                'sub_sub_category':sub_sub_category,
                'product': product,
-               'state_price':state_price
+               'state_price':state_price,
+               'all_products':all_products,
                }  
  
 
