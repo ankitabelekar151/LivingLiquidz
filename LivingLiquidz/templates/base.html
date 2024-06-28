@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 {% load static %}
-
+{% block title %}{% endblock %} 
 <html>
 <head>
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %} {% endblock title %}</title> 
   <!-- Add any additional meta tags, stylesheets, or scripts here -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-qx8r5yrdz7h38x8y7fv0js2fzrye6kghcuc7lp1kwcq31p0i93qo9yfkxstf9zp5" crossorigin="anonymous">
   
@@ -14,33 +13,23 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-  <!--Custom CSS-->
-  <link rel="stylesheet" href="{% static 'login/css/style.css' %}">
-  <link rel="icon" type="favicon" href="../media/upload_products/favicon.png">
   
-  <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css" />
-  <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+  <!--Favicon-->
+  <link rel="icon" type="favicon" href="../media/upload_products/favicon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700&subset=latin-ext" rel="stylesheet">
+
   <style>
     :root{
-      --color: #5B000A;
-      --navbg: #f1f1f1;
-      --bgcolor:#fafafa;
+      --color: #973131;/* #973131  5B000A*/
+      --navbg: #A67B5B; /*#E0A75E*/
+      --bgcolor:#fffdf5;
+      --navitem:#ffffff;
     }
-   /*  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-    */
     *{
-       font-family: 'Montserrat'; 
+      font-family: 'Josefin Sans', sans-serif;
     }
     .search-btn{
       background-color:var(--color) !important ;
@@ -82,7 +71,7 @@
       font-weight: bold;
       font-size: 18px;
     }
-    ul{
+    section ul{
       list-style:circle;
       margin-left: 25px;
     }
@@ -100,7 +89,8 @@ nav{
   z-index: 2;
   width: 100%;
   padding: 10px;
-  background: var(--navbg);
+  background: rgb(166,123,91);
+  background: linear-gradient(345deg, rgba(166,123,91,1) 45%, rgba(245,231,178,1) 100%);  
 }
 nav .wrapper{
   position: relative;
@@ -115,23 +105,25 @@ nav .wrapper{
 }
 .wrapper .nav-links{
   display: inline-flex;
+  margin-bottom: 0px;
 }
 .nav-links li{
   list-style: none;
 }
-.nav-links li a{
-  color: #202020;
+.nav-links .mega-box a{
+  color: #333333;
+  border-bottom: 1px solid transparent;
+}
+.nav-links .desktop-item{
+  color:var(--navitem) ;
+  padding: 10px 15px;
   text-decoration: none;
   font-size: 16px;
-  font-weight: 500;
-  border-radius: 5px;
+  font-weight: 600;
   transition: all 0.3s ease;
 }
-.desktop-item{
-  padding: 10px 20px;
-}
 .nav-links li a:hover{
-  background: #e0e0e0;
+  border-bottom: 1px solid var(--color);
 }
 .nav-links .mobile-item{
   display: none;
@@ -170,7 +162,7 @@ nav .wrapper{
   visibility: hidden;
 }
 .mega-box .content{
-  background: var(--navbg);
+  background-color: var(--navitem);
   padding: 25px 20px;
   display: flex;
   width: auto;
@@ -223,6 +215,7 @@ nav .wrapper{
   position: absolute;
   right: 30px;
   top: 10px;
+  background-color: #ffffff;
 }
 
 @media screen and (max-width: 970px) {
@@ -287,6 +280,22 @@ nav .wrapper{
   #showMega:checked ~ .mega-box{
     max-height: 100%;
   }
+  #showDrop:checked ~ .drop-menu,
+  #showMega2:checked ~ .mega-box{
+    max-height: 100%;
+  }
+  #showDrop:checked ~ .drop-menu,
+  #showMega3:checked ~ .mega-box{
+    max-height: 100%;
+  }
+  #showDrop:checked ~ .drop-menu,
+  #showMega4:checked ~ .mega-box{
+    max-height: 100%;
+  }
+  #showDrop:checked ~ .drop-menu,
+  #showMega5:checked ~ .mega-box{
+    max-height: 100%;
+  }
   .nav-links .desktop-item{
     display: none;
   }
@@ -344,8 +353,11 @@ nav .wrapper{
   .content .row header{
     font-size: 19px;
   }
+  .search-box{
+    display: none;
+  }
 }
-nav input{
+li input, .radio-btn{
   display: none;
 }
 
@@ -362,19 +374,73 @@ nav input{
   font-size: 45px;
   font-weight: 600;
 }
-  </style>
+.search-input{
+  background-color: #fafafa;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PGNpcmNsZSBjeD0iMTEiIGN5PSIxMSIgcj0iOCIvPjxwYXRoIGQ9Im0yMSAyMS00LTQiLz48L3N2Zz4=);
+    background-position: 12px;
+    background-repeat: no-repeat;
+    padding: 8px 10px 8px 50px;
+}
+.autocomplete-result-list{
+  background-color: #ffffff;
+}
+.autocomplete-result-list li{
+  padding:10px;
+  line-height: 20px;
+  font-size: 14px;
+  background-image: none;
+  border-bottom: 1px solid #f1f1f1;
+}
+#preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid var(--color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#content {
+  display: none;
+}
+
+
+</style>
   
 </head>
 <body>
-  <nav>
+  <nav style="z-index: 10;">
     <div class="wrapper">
-      <div class="logo"><a href="/"><img src="../media/upload_products/Logo.png" alt="Liquor Legends" width="150"></a></div>
-      <input type="radio" name="slider" id="menu-btn">
-      <input type="radio" name="slider" id="close-btn">
+      <div class="logo">
+        <a href="/">
+          <img src="../media/upload_products/Logo.png" alt="Liquor Legends" class="logo-1" width="150">
+        </a>
+      </div>
+      <input type="radio" name="slider" id="menu-btn" class="radio-btn">
+      <input type="radio" name="slider" id="close-btn" class="radio-btn">
       <ul class="nav-links">
         <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
 
         {% for cat in category %}
+        {% if cat.name == "Spirits" %}
         <li>
           <a class="desktop-item">{{cat.name}} <i class="fa fa-angle-down"></i></a>
           <input type="checkbox" id="showMega">
@@ -385,18 +451,86 @@ nav input{
                 {% for sub in cat.sub_category_set.all %}
                   <header class="txt-clr">{{ sub.name }}</header>
                   {% for sub_sub in sub.sub_sub_category_set.all %}
-                  <a class="" href="{% url 'category_products' sub_sub.id %}" target="_blank">{{ sub_sub.name }}</a>
+                  <a class="" href="{% url 'category_products' sub_sub.id %}">{{ sub_sub.name }}</a>
                   {% endfor %}
                 {% endfor %}
             </div>
             </div>
           </div>   
         </li>
+        {% endif %}
         {% endfor %}
+
+        {% for cat in category %}
+        {% if cat.name == "Wines" %}
+        <li>
+          <a class="desktop-item">{{cat.name}} <i class="fa fa-angle-down"></i></a>
+          <input type="checkbox" id="showMega2">
+          <label for="showMega2" class="mobile-item">{{cat.name}}</label>
+          <div class="mega-box" >
+            <div class="content">
+              <div class="row">
+                {% for sub in cat.sub_category_set.all %}
+                  <header class="txt-clr">{{ sub.name }}</header>
+                  {% for sub_sub in sub.sub_sub_category_set.all %}
+                  <a class="" href="{% url 'category_products' sub_sub.id %}">{{ sub_sub.name }}</a>
+                  {% endfor %}
+                {% endfor %}
+            </div>
+            </div>
+          </div>   
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        {% for cat in category %}
+        {% if cat.name == "Beers" %}
+        <li>
+          <a class="desktop-item">{{cat.name}} <i class="fa fa-angle-down"></i></a>
+          <input type="checkbox" id="showMega3">
+          <label for="showMega3" class="mobile-item">{{cat.name}}</label>
+          <div class="mega-box" >
+            <div class="content">
+              <div class="row">
+                {% for sub in cat.sub_category_set.all %}
+                  <header class="txt-clr">{{ sub.name }}</header>
+                  {% for sub_sub in sub.sub_sub_category_set.all %}
+                  <a class="" href="{% url 'category_products' sub_sub.id %}">{{ sub_sub.name }}</a>
+                  {% endfor %}
+                {% endfor %}
+            </div>
+            </div>
+          </div>   
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        {% for cat in category %}
+        {% if cat.name == "More" %}
+        <li>
+          <a class="desktop-item">{{cat.name}} <i class="fa fa-angle-down"></i></a>
+          <input type="checkbox" id="showMega4">
+          <label for="showMega4" class="mobile-item">{{cat.name}}</label>
+          <div class="mega-box" >
+            <div class="content">
+              <div class="row">
+                {% for sub in cat.sub_category_set.all %}
+                  <header class="txt-clr">{{ sub.name }}</header>
+                  {% for sub_sub in sub.sub_sub_category_set.all %}
+                  <a class="" href="{% url 'category_products' sub_sub.id %}">{{ sub_sub.name }}</a>
+                  {% endfor %}
+                {% endfor %}
+            </div>
+            </div>
+          </div>   
+        </li>
+        {% endif %}
+        {% endfor %}
+
         <li>
           <a href="#" class="desktop-item">Category</a>
-          <input type="checkbox" id="showMega">
-          <label for="showMega" class="mobile-item">Mega Menu</label>
+          <input type="checkbox" id="showMega5">
+          <label for="showMega5" class="mobile-item">Category</label>
           <div class="mega-box">
             <div class="content align-items-baseline justify-content-center">
               <div class="border rounded h-auto p-2 m-2">
@@ -423,25 +557,21 @@ nav input{
                   <header class="txt-clr text-center">Wine</header>
                 </a>
               </div>
-          </div>
+          </div> 
         </li>
+        
       </ul>
 
-      <div id="autocomplete" class="autocomplete">
-        <input class="autocomplete-input" />
-        <ul id="ull" class="autocomplete-result-list" style="color:red;"></ul>
-      </div> 
+      <div class="form-inline search-box">
+				<div class="input-group">
+				  <div id="autocomplete" class="autocomplete">
+					<input type="text" class="search-input form-control" placeholder="Search..."/>
+					<ul id="ull" class="autocomplete-result-list"></ul>
+				  </div>
+				</div>
+			</div>
 
-      <form class="form-inline">
-        <div class="input-group">
-          <input type="text" class="form-control " placeholder="Search">
-          <button class="btn search-bt" type="button">
-            <i class="bi bi-search"></i>
-          </button>
-        </div>
-      </form>  
-
-      <ul class="navbar-nav ml-auto position-relative">
+      <!-- <ul class="navbar-nav ml-auto position-relative">
         {% if request.user.is_authenticated and request.user.is_customer %} 
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #AE9479 !important;">
@@ -458,83 +588,23 @@ nav input{
           </li>
           {% endif %}  
 
-          <!-- <div class="d-flex align-item-center ">
+          <div class="d-flex align-item-center ">
             <button type="button" class="position-relative btn p-0 m-0"><i class="fas fa-shopping-cart fs-4 br-btn"></i>
               <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="top: 10px;">1</span>
             </button>
-          </div> -->
+          </div>
 
           </li>
-        </ul>
-      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+        </ul> -->
+      <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars text-white"></i></label>
     </div>
   </nav>
-  
 
-    <!-- <header class="main-header">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
-        <div class="container">
-          <a class="navbar-brand" href="/"><img src="../media/upload_products/Logo.png" alt="Liquor Legends" width="150"></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          
-          <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-            <ul class="navbar-nav mr-auto gap-0 gap-xl-2">
-              {% for cat in category %}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{cat.name}}
-                </a>
-                <div class="dropdown-menu p-3 mt-3 w-50" aria-labelledby="navbarDropdown2">
-                  {% for sub in cat.sub_category_set.all %}
-                  <span class="txt-clr">{{ sub.name }}</span>
-                    {% for sub_sub in sub.sub_sub_category_set.all %}
-                      <a class="dropdown-item" href="{% url 'category_products' sub_sub.id %}" target="_blank">{{ sub_sub.name }}</a>
-                    {% endfor %}
-                  {% endfor %}
-                </div>   
-              </li>
-              {% endfor %}
-            </ul>
-            
-            <form class="form-inline my-2 my-lg-0">
-              <div class="input-group">
-                <input type="text" class="form-control search-box" placeholder="Search">
-                <button class="btn btn-secondary search-btn" type="button">
-                  <i class="fas fa-search"></i>
-                </button>
-              </div>
-            </form>
-            <ul class="navbar-nav ml-auto position-relative">
-              {% if request.user.is_authenticated and request.user.is_customer %} 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #AE9479 !important;">
-                        Welcome,{{ request.user.first_name}}</br>
-                        My Account
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/customer_logout/">Logout</a>
-                    </div>
-                </li>
-                {% else %}
-                <li class="nav-item d-flex align-item-center">
-                    <a class="nav-link" href="/customer_signin/"><i class="bi bi-person-fill fs-3 br-btn"></i><span>Sign in</span></a>
-                </li>
-                {% endif %}  -->
 
-                <!-- <div class="d-flex align-item-center ">
-                  <button type="button" class="position-relative btn p-0 m-0"><i class="fas fa-shopping-cart fs-4 br-btn"></i>
-                    <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger" style="top: 10px;">1</span>
-                  </button>
-                </div> -->
 
-                <!-- </li>
-              </ul>
-          </div>
-        </div>
-    </nav>    
-  </header> -->
+  <!-- <div id="preloader">
+    <div class="spinner"></div>
+  </div> -->
     
   <div class="content">
       {% block content %}
@@ -560,32 +630,30 @@ nav input{
           <div class="col-md-3 mt-2">
             <h5>Liquor Legends</h5>
             <ul class="list-unstyled">
-                <li><a href="#">Spirits</a></li>
-                <li><a href="#">Wine</a></li>
-                <li><a href="#">Beer</a></li>
-                <li><a href="#">Whisky</a></li>
-                <li><a href="#">Rum</a></li>
-                <li><a href="#">Scotch</a></li>
+              <li><a href="/wine/">Wine</a></li>
+              <li><a href="/beer/">Beer</a></li>
+              <li><a href="/whisky">Whisky</a></li>
+              <li><a href="/vodka/">Vodka</a></li>
             </ul>
           </div>
 
           <div class="col-md-3 mt-2">
             <h5>Useful Links</h5>
             <ul class="list-unstyled">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about/">About Us</a></li>
-                <li><a href="/contact/">Contact Us</a></li>
-                <!-- <li><a href="#">Bulk Order</a></li>
-                <li><a href="/seller_signup/">Seller Signin</a></li> -->
+              <li><a href="/">Home</a></li>
+              <li><a href="/about/">About Us</a></li>
+              <li><a href="/contact/">Contact Us</a></li>
+              <!-- <li><a href="#">Bulk Order</a></li>
+              <li><a href="/seller_signup/">Seller Signin</a></li> -->
             </ul>
           </div>
 
           <div class="col-md-3 mt-2">
             <h5>Support</h5>
             <ul class="list-unstyled">
-                <li><a href="/termsConditions/">Terms & Conditions</a></li>
-                <li><a href="/privacyPolicy/">Privacy Policy</a></li>
-                <li><a href="/faq/">FAQs</a></li>
+              <li><a href="/termsConditions/">Terms & Conditions</a></li>
+              <li><a href="/privacyPolicy/">Privacy Policy</a></li>
+              <li><a href="/faq/">FAQs</a></li>
             </ul>
           </div>
 
@@ -596,7 +664,7 @@ nav input{
       <div class="container border-top">
         <div class="row">
           <div class="col-md-6 mt-1">
-            <p style="font-size: 15px;">@2024 Liqour Legends. All Rights Reserved</p>
+            <p style="font-size: 15px; color: #ffffff;">@2024 Liqour Legends. All Rights Reserved</p>
           </div>
           <div class="col-md-6 mt-1">
             
@@ -610,17 +678,68 @@ nav input{
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-    <script src="{% static 'login/js/owl.carousel.min.js' %}"></script>
+
     <script src="{% static 'login/js/all.min.js' %}"></script>
     <script src="{% static 'login/js/myscript.js' %}"></script>
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+    <script>
+      let productMap = {};  // A mapping of titles to IDs
+    
+      new Autocomplete('#autocomplete', {
+        search: input => {
+          const url = `/search_suggestions/?search=${input}`;
+          return new Promise(resolve => {
+            fetch(url).then(response => response.json()).then(data => {
+              productMap = {};  // Clear the previous mappings
+              const titles = data.payload.map(item => {
+                productMap[item.title] = item.id;  // Populate the mapping
+                return item.title;  // Return only the title for the suggestions
+              });
+              resolve(titles);  // Resolve with titles only
+            });
+          });
+        },
+        onSubmit: function(result) {
+          const productId = productMap[result];  // Get the ID from the map
+          if (productId) {
+            window.location.href = `/product_details/${productId}`;  // Redirect to details page
+          }
+        }
+      });
+    
+      $('#ull').click(function (e) {
+        const productId = productMap[$('#autocomplete').val()];  // Get the ID from the map
+        if (productId) {
+          $.ajax({
+            url: '',
+            type: 'GET',
+            data: {
+              valname: productId,
+            },
+            success: function (response) {
+              window.location = response.urlLink;
+            }
+          });
+        }
+      });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      window.addEventListener("load", function() {
+        const preloader = document.getElementById('preloader');
+        preloader.style.display = 'none';
+        
+        const content = document.getElementById('content');
+        content.style.display = 'block';
+      });
+    });
+   
+    </script>
 </body>
 </html>
 

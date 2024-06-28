@@ -1,38 +1,99 @@
 {% extends 'base.html' %}
 
-{% block title %}{{product.title}}{% endblock %} 
 
 {% block content %}
 {% load static %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{product.title}}</title>
+  <meta name="description" content="">
+  <meta name="keyword" content="">
+  <link rel="canonical" href="">
 
-<style>
+  <style>
+    .product-img {
+      max-width: 90%;
+    }
+    h1{
+      font-size: 30px;
+    }
+    h2{
+      font-size: 20px;
+    }
+    .modal-dialog{
+      min-width: max-content;
+    }
+    h1{
+      font-size: 25px;
+      padding: 10px 0px;
+      font-weight: 600;
+    }
+    h3{
+      font-size: 18px;
+    }
+    .product-box {
+      border: 1px solid #f0f0f0;
+      box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 20px;
+      padding: 20px 10px;
+      border-radius: 10px;
+      transition: 0.5s;
+    }
+    .product-box:hover {
+      box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+      transition: 1s;
+    }
+    .product-img {
+      max-width: 100%;
+      height: auto;
+    }
+    a{
+      color: #333333;
+    }
+    tbody tr td{
+      color: #474747 !important;
+    }
+    body{
+      background-color: var(--navitem);
+    }
+    .description{font-size: 14px;}
+    .meta-detail{font-size: 16px;}
+    @media screen and (max-width:800px){
+      .modal-dialog{
+      min-width: auto;
+      }
+    }
   
-  .product-img {
-    max-width: 90%;
-  }
-  h1{
-    font-size: 30px;
-  }
-  h2{
-    font-size: 20px;
-  }
-</style>
+    
+  </style>
+</head>
+<body>
+
 <div class="container">
-  <div class="product-box p-2">
-      <div class="row p-2">
-        <div class="col col-sm-4 col-md-4 p-2">
-            <img src="/media/{{ product.product_image }}" class="product-img" alt="ProductImage">
+  <div class="p-2">
+    <div>
+      <!--Breadcrumb-->
+    </div>
+      <div class="row p-2 mb-2">
+        <div class="cat-head mb-2">
+          <div><a href="/">Home</a> <i class="fa fa-angle-right"></i> {{product.sub_sub_category}}</div>
         </div>
-        <div class="col col-sm-8 col-md-8 mt-3">
+        <div class="col col-sm-4 col-md-4 p-2">
+          <img src="/media/{{ product.product_image }}" class="product-img" alt="ProductImage">
+        </div>
+        <div class="col col-sm-8 col-md-8 mt-3 p-3 prod-detail">
           <h2>{{product.sub_sub_category}}</h2>
           <h1>{{product.title}}</h1>
-          <p>{{product.description}}</p>
+          <!-- <p>{{product.description}}</p> -->
             <div class="border-top">
             <h2 class="mt-2">State Wise Price</h2>
             <div class="overflow-auto">
               <table class="table table-responsive table-bordered text-center">
-                <thead>
+                <thead class="table-light">
                   <tr>
                     <th>State</th> <th>90ml</th> <th>180ml</th> <th>375ml</th> <th>750ml</th> <th>1L</th> <th>2L</th>
                   </tr>
@@ -59,17 +120,84 @@
           </div>
         </div>
       </div>
-      <div>
-        <h2>You might also Like</h2>
 
+      <div>
+        <div class="border-bottom mb-2">
+          <h2>You might also Like</h2>
+        </div>
+         {% for i in all_products %}
+          <div class="prodbox1 col-sm-6 col-md-6 col-xl-4 bg-white">
+            <div class="product-box">
+              <div class="row">
+                <div class="col-4 col-sm-4 col-md-4">
+                  <a href="{% url 'product_details' i.id %}">
+                    <img src="/media/{{ i.product_image }}" class="product-img" alt="{{ i.title }}">
+                  </a>
+                </div>
+                <div class="col-8 col-sm-8 col-md-8 p-body">
+                  <div>
+                    <a href="{% url 'product_details' i.id %}">
+                      <h3 class="title">{{i.title}}</h3>
+                    </a>
+                    <span class="description">{{i.description}}</span>
+                    <div class="mt-2"><span>Price: <b>₹</b></span><span id="showprice"><b>{{ i.price }}</b></span></div>
+                  </div>
+                  <!-- <button class="btn compare-button btn-sm float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">Compare</button>
+                  
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title fs-5" id="exampleModalLabel">Compare Statewise</h4>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <table class="table table-responsive table-bordered text-center">
+                            <thead>
+                              <tr>
+                                <th>State</th> <th>90ml</th> <th>180ml</th> <th>375ml</th> <th>750ml</th> <th>1L</th> <th>2L</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for price in state_price %}
+                              {% if state_price %}
+                              <tr>
+                                <td>{{ price.state }}</td>
+                                {% if price.size_90ml %}<td>₹{{ price.size_90ml }}</td> {% else %} <td>-</td> {% endif %}
+                                {% if price.size_180ml %}<td>₹{{ price.size_180ml }}</td> {% else %} <td>-</td> {% endif %}
+                                {% if price.size_375ml %}<td>₹{{ price.size_375ml }}</td> {% else %} <td>-</td> {% endif %}
+                                {% if price.size_750ml %}<td>₹{{ price.size_750ml }}</td> {% else %} <td>-</td> {% endif %}
+                                {% if price.size_1ltr %}<td>₹{{ price.size_1ltr }}</td> {% else %} <td>-</td> {% endif %}
+                                {% if price.size_2000ml %}<td>₹{{ price.size_2000ml }}</td> {% else %} <td>-</td> {% endif %} 
+                              </tr>
+                              {% endif %}
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
       </div>
   </div>
 </div>
-  
+
 <script>
   function updatePrice(newPrice) {
       document.getElementById('product-price').innerText = newPrice;
   }
 </script>
+</body>
+</html>
+
 
 {% endblock %}
