@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ's</title>
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="canonical" href="">
+
+    <style>
+        h1{
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+            color: #ffffff;
+        }
+        h2{
+            font-size: 20px;
+            font-weight: 500;
+        }
+        p{
+            font-size: 14px;
+            text-align: justify;
+        }
+        body{
+            background-color: var(--bgcolor);
+        }
+        .head-sec{
+            background-color: var(--color);
+            padding: 20px;
+            min-height: 200px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .container{
+          padding:40px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="head-sec">
+        <h1>Frequently Asked Questions</h1>
+    </div>
+    <div class="container">
+        <div>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        How should I store wine to maintain its quality?
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>To preserve the quality of your wine, store it in a cool, dark place away from direct sunlight and temperature fluctuations. Ideally, wines should be stored horizontally to keep the cork moist and prevent oxidation.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        What's the difference between Scotch whisky and Bourbon?
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>Scotch whisky is typically made from malted barley in Scotland and aged for at least three years. Bourbon, on the other hand, is predominantly made from corn and aged in charred oak barrels in the United States, giving it a sweeter and smoother profile compared to Scotch.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Are flavored vodkas gluten-free?
+                    </button>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>While most vodkas are gluten-free due to the distillation process, flavored vodkas may contain additives that could potentially introduce gluten. It's advisable to check the label or contact the manufacturer for specific gluten-free certifications.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        How do I choose the right beer for pairing with food?
+                      </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>When pairing beer with food, consider the flavors and intensities of both the dish and the beer. Light lagers and pale ales complement lighter dishes like salads and seafood, while stouts and porters pair well with hearty dishes such as grilled meats and chocolate desserts.</p>
+                    </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        What’s the best way to serve and enjoy craft beers?
+                      </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p>Craft beers are best served in glassware that enhances their aromas and flavors, such as tulip glasses for IPAs or pint glasses for stouts. Allow the beer to warm slightly from fridge temperature before drinking to fully appreciate its complexity.</p>
+                    </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

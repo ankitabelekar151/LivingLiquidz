@@ -1,27 +1,224 @@
 {% extends 'base.html' %}
 
-{% block title %}Liquor Legends{% endblock %}
-
 {% block content %}
 {% load static %}
 
 
- <style>
-    .c.img{
-      object-fit: cover;
-    }
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liquor Legends</title>
+  <meta name="description" content="">
+  <meta name="keyword" content="">
+  <link rel="canonical" href="">
+
+<style>
+  .c.img{
+    object-fit: cover;
+  }
+  .c-container{
+    height: 80vh;
+  } 
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+  height : 100%;
+  position : relative;
+  margin: auto;
+  z-index: 0;
+  background-color: white;
+}
+.animated{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  -webkit-animation-name: animate;
+  -webkit-animation-duration: 1s;
+  animation-name: animate;
+  animation-duration: 1s;
+}
+/* Hide the images by default */
+.mySlides {
+display: none;
+}
+.mySlides img {
+display: block;
+width: 100%;
+height: 100%;
+}
+.prev, .next {
+cursor: pointer;
+position: absolute;
+top: 50%;
+-webkit-transform: translate(0, -50%);
+-ms-transform: translate(0, -50%);
+transform: translate(0, -50%);
+width: 50px;
+height: 50px;
+margin-left: 15px;
+margin-right: 15px;
+color: white;
+font-weight: bold;
+padding-left: 17px;
+padding-top: 6px;
+font-size: 25px;
+border-radius: 50%;
+background: rgba(255, 255, 255, 0.266);
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+.prev i{
+color: white;
+}
+.next i{
+color: white;
+}
+.next {
+  right: 0;
+  width: 50px;
+  height: 50px;
+  margin-left: 15px;
+  margin-right: 15px;
+  color: white;
+  font-weight: bold;
+  padding-left: 19px;
+  padding-top: 6px;
+  font-size: 25px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.266);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.prev:hover, .next:hover {
+  background: rgba(255, 255, 255, 0.597);
+}
+.dots-container {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+  -ms-transform: translate(-50%);
+  transform: translate(-50%);
+  -webkit-transition: all cubic-bezier(0.39, 0.575, 0.565, 1) ease;
+  -o-transition: all cubic-bezier(0.39, 0.575, 0.565, 1) ease;
+  transition: all cubic-bezier(0.39, 0.575, 0.565, 1) ease;
+  background-color: rgba(10, 10, 20, 0.1);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  padding: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 50px;
+}
+.dots {
+  cursor: pointer;
+  height: 10px;
+  width: 10px;
+  margin: 0 4px;
+  background-color: rgba(0, 0, 0, 0.171);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  border-radius: 50%;
+  display: inline-block;
+  -webkit-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.active, .dots:hover {
+  background-color: rgb(255, 255, 255);
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+@keyframes animate {
+  from {
+    -webkit-transform: scale(1.05) rotateY(10deg);
+    transform: scale(1.05) rotateY(10deg);
+  }
+  to {
+    -webkit-transform: scale(1) rotateY(0deg);
+    transform: scale(1) rotateY(0deg);
+  }
+} 
+  @media screen and (max-width: 480px) {
     .c-container{
-      height: 80vh;
+      height: 40vh;
     }
-    @media screen and (max-width: 480px) {
-      .c-container{
-        height: 40vh;
-      }
+  }
+</style>
+<style>
+  .category-range .card-img-top:hover{
+    transform: scale(104%);
+    transition: 0.5s;
+  }
+  .category-range .card-img-top{
+    transition: 0.5s;
+  }
+  .category-range .card-title{
+    margin: 0px 0px 10px 20px;
+    color: #343434;
+  }
+  .category-range .card-img-top:hover > .card-title{
+    color: var(--color);
+  }
+  .category-range .cat-box:hover{
+    border-bottom: 3px solid var(--color);
+  }
+  .section-4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .section-2, .section-3, .section-4, .section-5, .section-6{
+    padding: 40px 0px 40px 0px;
+  }
+  .whisky-bg{
+    background: url(../media/other/whisky-bg.webp) no-repeat center center;
+    height: 90vh;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+  @media screen and (max-width: 480px) {
+    .whisky-bg{
+      height: 60vh;
+      background-position: center;
+      background-size: cover;
+      padding: 0px 20px;
     }
-  </style> 
+    .whisky-btn{
+      width: auto;
+      margin-top: 10px;
+    }
+  }
+  .whisky-btn{
+    background: var(--color);
+    color: #ffffff;
+    width: 95%;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+    border-radius: 30px;
+    transition: 0.5s;
+  }
+  .whisky-bg .whisky-btn:hover{
+    transform: scale(104%);
+    transition: 0.5s;
+  }
+</style>
+</head>
+<body>
 
   <!-- Carousel Slider -->
-  <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <!-- <div id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner c-container" >
       <div class="carousel-item active" >
         <img src="static/login/images/slider-1.jpg" class="d-block w-100 c-img img-fluid" alt="">
@@ -41,12 +238,44 @@
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
-  </div>
+  </div> -->
   <!-- End Carousel Slider -->
-  
+  <div class ="animated">
+    <div class="carousel-container">
+      <a href="/category_products/1">
+        <div class="mySlides animate c-container">
+          <img src="static/login/images/slider-1.jpg" class="c-img" alt="slide1" />
+        </div>
+      </a>
+      <a href="/category_products/2">
+        <div class="mySlides animate c-container">
+          <img src="static/login/images/slider-2.jpg" class="c-img" alt="slide2" />
+        </div>
+      </a>
+      <a href="/category_products/3">
+        <div class="mySlides animate c-container">
+          <img src="static/login/images/slider-3.jpg" class="c-img" alt="slide3" />
+        </div>
+      </a>
+
+      <!-- Next and previous buttons -->
+      <a class="prev" onclick="prevSlide()"><i class="fa fa-angle-left"></i></a>
+      <a class="next" onclick="nextSlide()"><i class="fa fa-angle-right"></i></a>
+    
+      <!-- The dots/circles -->
+      <!-- <div class="dots-container">
+        <span class="dots" onclick="currentSlide(1)"></span>
+        <span class="dots" onclick="currentSlide(2)"></span>
+        <span class="dots" onclick="currentSlide(3)"></span>
+        <span class="dots" onclick="currentSlide(4)"></span>
+        <span class="dots" onclick="currentSlide(5)"></span>
+      </div> -->
+    </div>
+  </div>
 
   <!-- card starts here -->
-  <div class="container pt-4 pb-4">
+  <div class="container section-2">
+    <h2 class="text-center">TOP CATEGORIES</h2>
     <div class="row g-3">
       <div class="col-6 col-md-4 col-lg-3 justify-content-stretch">
         <a href="{% url 'whisky' %}" class="card-link">
@@ -83,46 +312,347 @@
           </div>
         </a>
       </div>
-
-      <!-- <div class="col-6 col-md-4 col-lg-3">
-        <a href="#" class="card-link">
-          <div class="card">
-            <img src="static/login/images/box3.jpg" class="card-img rounded-0 rounded-top" alt="Image">
-            <div class="card-footer text-center bg-clr text-white fw-bold">RUM</div> 
-          </div>
-        </a>
-      </div>
-
-      <div class="col-6 col-md-4 col-lg-3">
-        <a href="#" class="card-link">
-          <div class="card">
-            <img src="static/login/images/box3.jpg" class="card-img rounded-0 rounded-top" alt="Image">
-            <div class="card-footer text-center bg-clr text-white fw-bold">TEQUILA</div> 
-          </div>
-        </a>
-      </div>
-      
-      <div class="col-6 col-md-4 col-lg-3">
-        <a href="#" class="card-link">
-          <div class="card">
-            <img src="static/login/images/box3.jpg" class="card-img rounded-0 rounded-top" alt="Image">
-            <div class="card-footer text-center bg-clr text-white fw-bold">GIN</div> 
-          </div>
-        </a>
-      </div>
-
-      <div class="col-6 col-md-4 col-lg-3">
-        <a href="#" class="card-link">
-          <div class="card">
-            <img src="static/login/images/box3.jpg" class="card-img rounded-0 rounded-top" alt="Image">
-            <div class="card-footer text-center bg-clr text-white fw-bold">SINGLE MALTS</div> 
-          </div>
-        </a>
-      </div>
-    -->
     </div>
   </div>
   <!-- card ends here-->
+  <!-- <div>
+    <h2 class="text-center">POPULAR PRODUCTS</h2>
+    <div class="row" id="products-container">
+      {% for i in products %}
+      <div class="prodbox1 col-sm-6 col-md-6 col-xl-6 position-relative">
+        <div class="product-box">
+          <div class="row">
+            <div class="col-4 col-sm-4 col-md-4">
+              <a href="{% url 'product_details' i.id %}">
+                <img src="/media/{{ i.product_image }}" class="product-img" alt="{{ i.title }}">
+              </a>
+            </div>
+            <div class="col-8 col-sm-8 col-md-8 p-body">
+              <div>
+                <a href="{% url 'product_details' i.id %}">
+                  <h3 class="title">{{i.title}}</h3>
+                </a>
+                <div class="mt-2"><span>Price: <b>₹</b></span><span id="showprice"><b>{{ i.price }}</b></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %} 
+    </div>  
+  </div> -->
+
 
   
+  <div class="section-3">
+    <h2 class="text-center mb-4">ARE YOU LOOKING FOR WHISKY?</h2>
+    <div class="whisky-bg">
+      <div class="container">
+      <div class="row align-items-center">
+        <div class="col-sm-12 col-md-6 col-xl-6 ms-2">
+          <div class="whisky-box row">
+            <h3>The World of Whisky Awaits</h3>
+            <div class="col-6 col-sm-6 col-md-6 col-xl-6">
+              <a href="/category_products/2"><div class="whisky-btn">Premium Whisky</div></a>
+              <a href="/category_products/1"><div class="whisky-btn">Blended Whisky</div></a>
+              <a href=""><div class="whisky-btn">Single Malt</div></a>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-xl-6">
+              <a href="/category_products/2"><div class="whisky-btn">International</div></a>
+              <a href="/category_products/1"><div class="whisky-btn">Scotch</div></a>
+              <a href=""><div class="whisky-btn">Whisky</div></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-4">
+    <div style="width: 98%;">
+    <h2 class="text-center mb-4">TASTE YOU LOVE</h2>
+    
+    <div class="category-range">
+      <div class="row">
+        <div class="col-sm-6 col-md-4 col-xl-4 bg-light cat-box">
+          <a href="#">
+            <div class="p-2" >
+              <img src="../media/Taste_category/Beer.webp" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5 class="card-title">BEER</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4 col-xl-4 cat-box">
+          <a href="#">
+            <div class="p-2">
+              <img src="../media/Taste_category/Rum.webp" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5 class="card-title">RUM</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4 col-xl-4 bg-light cat-box">
+          <a href="#">
+            <div class="p-2">
+              <img src="../media/Taste_category/Vodka.webp" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5 class="card-title">VODKA</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4 col-xl-4 cat-box">
+          <a href="#">
+            <div class="p-2">
+              <img src="../media/Taste_category/Whisky.webp" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5 class="card-title">WHISKY</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4 col-xl-4 bg-light cat-box">
+          <a href="#">
+            <div class="p-2">
+              <img src="../media/Taste_category/Wine.webp" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5 class="card-title">WINE</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4 col-xl-4 cat-box">
+          <a href="#">
+            <div class="p-2">
+              <img src="../media/Taste_category/Red-Wine.webp" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5 class="card-title">RED WINE</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4 col-xl-4 bg-light cat-box">
+          <a href="#">
+            <div class="p-2">
+              <img src="../media/Taste_category/gin.webp" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5 class="card-title">GIN</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4 col-xl-4 cat-box">
+          <a href="#">
+            <div class="p-2">
+              <img src="../media/Taste_category/champaign.webp" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5 class="card-title">CHAMPAIGN</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-sm-6 col-md-4 col-xl-4 bg-light cat-box">
+          <a href="#">
+            <div class="p-2">
+              <img src="../media/Taste_category/Don-Angel-Blanco-Tequila.webp" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5 class="card-title">TAQUILA</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="section-5 container">
+    <h2 class="text-center mb-4">TOP BRANDS</h2>
+    <div class="row">
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/absolut.jpg" alt="absolut"></div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/bacardi.jpg" alt="bacardi"></div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/baileys.jpg" alt="baileys"></div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/budweiser.jpg" alt="budweiser"></div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/chivas.jpg" alt="chivas"></div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/jack.jpg" alt="jack daniel"></div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/johnnie.jpg" alt="johnnie walker"></div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/remy.jpg" alt="remy"></div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/smirof.jpg" alt="smirof"></div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/tanqueray.jpg" alt="tanqueray"></div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/old_monk.jpg" alt="old_monk"></div>
+      </div>
+      <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+        <div class="p-2"><img src="../media/Brands/seagram.png" alt="seagram"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container section-6">
+    <h2 class="text-center">FAQ's</h2>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              How should I store wine to maintain its quality?
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+              <p>To preserve the quality of your wine, store it in a cool, dark place away from direct sunlight and temperature fluctuations. Ideally, wines should be stored horizontally to keep the cork moist and prevent oxidation.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              What’s the difference between Scotch whisky and Bourbon?
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+              <p>Scotch whisky is typically made from malted barley in Scotland and aged for at least three years. Bourbon, on the other hand, is predominantly made from corn and aged in charred oak barrels in the United States, giving it a sweeter and smoother profile compared to Scotch.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Are flavored vodkas gluten-free?
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+              <p>While most vodkas are gluten-free due to the distillation process, flavored vodkas may contain additives that could potentially introduce gluten. It's advisable to check the label or contact the manufacturer for specific gluten-free certifications.</p>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              How do I choose the right beer for pairing with food?
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+              <p>When pairing beer with food, consider the flavors and intensities of both the dish and the beer. Light lagers and pale ales complement lighter dishes like salads and seafood, while stouts and porters pair well with hearty dishes such as grilled meats and chocolate desserts.</p>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <script>
+    let slideIndex = 0;
+    showSlides();
+    // Next-previous control
+    function nextSlide() {
+      slideIndex++;
+      showSlides();
+      timer = _timer; // reset timer
+    }
+    function prevSlide() {
+      slideIndex--;
+      showSlides();
+      timer = _timer;
+    }
+    // Thumbnail image controlls
+    function currentSlide(n) {
+      slideIndex = n - 1;
+      showSlides();
+      timer = _timer;
+    }
+    function showSlides() {
+      let slides = document.querySelectorAll(".mySlides");
+      let dots = document.querySelectorAll(".dots");
+
+      if (slideIndex > slides.length - 1) slideIndex = 0;
+      if (slideIndex < 0) slideIndex = slides.length - 1;
+      
+      // hide all slides
+      slides.forEach((slide) => {
+        slide.style.display = "none";
+      });
+      // show one slide base on index number
+      slides[slideIndex].style.display = "block";
+      dots.forEach((dot) => {
+        dot.classList.remove("active");
+      });
+      dots[slideIndex].classList.add("active");
+    }
+    // autoplay slides 
+    let timer = 5; // sec
+    const _timer = timer;
+
+    // this function runs every 1 second
+    setInterval(() => {
+      timer--;
+      if (timer < 1) {
+        nextSlide();
+        timer = _timer; // reset timer
+      }
+    }, 1000); // 1sec
+  </script>
+  <script>
+    $(document).ready(function(){
+
+    $('#itemslider').carousel({ interval: 3000 });
+
+    $('.carousel-showmanymoveone .item').each(function(){
+    var itemToClone = $(this);
+
+    for (var i=1;i<6;i++) {
+    itemToClone = itemToClone.next();
+
+    if (!itemToClone.length) {
+    itemToClone = $(this).siblings(':first');
+    }
+
+    itemToClone.children(':first-child').clone()
+    .addClass("cloneditem-"+(i))
+    .appendTo($(this));
+    }
+    });
+    });
+
+  </script>
+  <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+</body>
+</html>
+
 {% endblock %}

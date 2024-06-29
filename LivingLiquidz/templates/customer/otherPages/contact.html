@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="canonical" href="">
+
+    <style>
+        h1{
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+            color: #ffffff;
+        }
+        h2{
+            font-size: 20px;
+            font-weight: 500;
+        }
+        p{
+            font-size: 14px;
+            text-align: justify;
+        }
+        body{
+            background-color: var(--bgcolor);
+        }
+        .head-sec{
+            background-color: var(--color);
+            padding: 20px;
+            min-height: 200px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .container{
+            height: 50vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="head-sec">
+        <h1>Contact Us</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-xl-4">
+                <div class="p-3 m-2 border rounded shadow text-center">
+                    <h2>Address</h2>
+                    <p class="text-center">0101, Socity nagar, Nagpur-01</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xl-4">
+                <div class="p-3 m-2 border rounded shadow text-center">
+                    <h2>Email</h2>
+                    <p class="text-center">info@example.com</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 col-xl-4">
+              <div class="p-3 m-2 border rounded shadow text-center">
+                <h2>Contact No</h2>
+                <p class="text-center">1234567890</p>
+              </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

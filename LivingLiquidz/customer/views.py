@@ -22,10 +22,10 @@ def category_products(request,id):
     sub_category = Sub_Category.objects.all()
     sub_sub_category = Sub_Sub_Category.objects.get(id=id)
     products = Product.objects.filter(sub_sub_category__name=sub_sub_category.name)
-
     
     state_prices = StatePrice.objects.filter(product__in=products)
 
+    
     context = {
         'category':category,
         'sub_category':sub_category,
@@ -35,14 +35,14 @@ def category_products(request,id):
     }
     return render(request,'customer/category_products.html',context)
 
-
 def product_details(request,id):
     category = Category.objects.all()
     sub_category = Sub_Category.objects.all()
     sub_sub_category = Sub_Sub_Category.objects.get(id=id)
-  
     try:
         product = Product.objects.get(id=id)
+        sub_sub_category = product.sub_sub_category
+        all_products = Product.objects.filter(sub_sub_category=sub_sub_category).exclude(id=id)
         state_price = StatePrice.objects.filter(product=product)
     except StatePrice.DoesNotExist:
         state_price = None 
@@ -54,59 +54,126 @@ def product_details(request,id):
                'sub_category':sub_category,
                'sub_sub_category':sub_sub_category,
                'product': product,
-               'state_price':state_price
+               'state_price':state_price,
+               'all_products':all_products,
                }  
+
 
     return render(request, 'customer/product_details.html',context)
 
-    
-# def indian_whisky_blended(request):
-#     comparison_results = {} 
-#     if request.method == 'POST' and 'product_id' in request.POST:
-#         product_id = request.POST['product_id']
-#         product = Product.objects.get(id=product_id)
-#         # state_prices = StatePrice.objects.filter(product=product)
-#         # comparison_results = {state_price.state: state_price.price for state_price in state_prices}
-    
-#         # Convert JSON data into an HTML table
-#         table_data = '<table>'
-#         table_data += '<tr><th>State</th><th>Price</th></tr>'
-#         for state, price in comparison_results.items():
-#             table_data += f'<tr><td>{state}</td><td>{price}</td></tr>'
-#         table_data += '</table>'
+def whisky(request):
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
         
-#         return render(request, 'customer/indian_whisky_premium.html', {'table_data': table_data})
+    }
+    return render(request,'customer/whisky.html',context)
 
-#     category = Category.objects.get(name="Indian whisky blended")
-#     indian_whisky_blended = Product.objects.filter(category=category)
+def wine(request):
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
 
-#     context = {
-#         'indian_whisky_blended':indian_whisky_blended,
-#         }
-#     return render(request, 'customer/indian_whisky_blended.html',context)
-
-# def indian_whisky_premium(request):
-#     comparison_results = {} 
-    
-#     if request.method == 'POST' and 'product_id' in request.POST:
-#         product_id = request.POST['product_id']
-#         product = Product.objects.get(id=product_id)
-#         state_prices = StatePrice.objects.filter(product=product)
-#         comparison_results = {state_price.state: state_price.price for state_price in state_prices}
-    
-#         # Convert JSON data into an HTML table
-#         table_data = '<table>'
-#         table_data += '<tr><th>State</th><th>Price</th></tr>'
-#         for state, price in comparison_results.items():
-#             table_data += f'<tr><td>{state}</td><td>{price}</td></tr>'
-#         table_data += '</table>'
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
         
-#         return render(request, 'customer/indian_whisky_premium.html', {'table_data': table_data})
-    
-#     category = Category.objects.get(name="Indian Whisky Premium")
-#     indian_whisky_premium = Product.objects.filter(category=category)
-#     context = {
-#         'indian_whisky_premium':indian_whisky_premium
-#         }
-#     return render(request, 'customer/indian_whisky_premium.html',context)
+    }
+    return render(request,'customer/wine.html',context)
 
+def vodka(request):
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/vodka.html',context)
+
+def beer(request):
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/beer.html',context)
+
+def about(request):
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/otherPages/about.html',context)
+
+def contact(request):
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/otherPages/contact.html',context)
+
+def privacyPolicy(request):
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/otherPages/privacyPolicy.html',context)
+
+def termsConditions(request):
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/otherPages/termsConditions.html',context)
+
+def faq(request):
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/otherPages/faq.html',context)

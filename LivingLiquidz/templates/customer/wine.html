@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wines</title>
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="canonical" href="">
+
+    <style>
+        h1{
+            font-size: 30px;
+            text-align: center;
+        }
+        h2{
+            font-size: 20px;
+            font-weight: 500;
+        }
+        p{
+            font-size: 14px;
+            text-align: justify;
+        }
+        .catimg{
+            max-width: 80%;
+        }
+        .head-sec{
+            padding: 20px;
+        }
+        body{
+            background-color: var(--bgcolor);
+        }
+        .cat-btn{
+            background-color: var(--color);
+            color: #ffffff;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container p-2">
+        <div class="head-sec">
+            <h1>Uncork the World of Wine</h1>
+            <p class="text-center">Explore the vast varietals and discover your perfect bottle.</p>
+        </div>
+        <div class="p-2 ">
+            <div class="row">
+                <div class=" col-sm-6 col-md-6 col-xl-6 text-center ">
+                    <img src="../../media/categories/wine.jpg" alt="whisky" class="rounded catimg">
+                </div>
+                <div class="col-sm-6 col-md-6 col-xl-6 ">
+                    <div class="bg-white p-3 rounded shadow-lg">
+                        <div>
+                            <h2 class="mb-2">Domestic</h2>
+                            <div class="d-flex flex-wrap">
+                                <a class="cat-btn" href="#">Premium Whisky</a>
+                                <a class="cat-btn" href="#">Red Wines</a>
+                                <a class="cat-btn" href="#">Premium Whisky</a>
+                                <a class="cat-btn" href="#">Red Wines</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-3 mt-3 rounded shadow-lg">
+                        <div>
+                            <h2 class="mb-2">Imported</h2>
+                            <div class="d-flex flex-wrap">
+                                <a class="cat-btn" href="#">Premium Whisky</a>
+                                <a class="cat-btn" href="#">Red Wines</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="container mt-2">
+            <h2>Discover the Finest Wines at Liquor Legends</h2>
+            <p>Welcome to Liquor Legends, your premier destination for a world-class selection of wines. 
+                Whether you're a wine aficionado or just starting your journey into the world of wines, 
+                our carefully curated collection has something for everyone. Explore our extensive range of red, 
+                white, rosé, and sparkling wines sourced from top vineyards around the globe.
+            </p>
+            <h2>Shop Red Wines Online</h2>
+            <p>Indulge in the richness and complexity of our red wines. From full-bodied Cabernet 
+                Sauvignon to light and elegant Pinot Noir, our red wine collection is perfect for any occasion. 
+                Red wines are ideal for pairing with a variety of foods, enhancing your dining experience with 
+                their bold flavors and aromas.
+            </p>
+            <h2>Buy White Wines Online</h2>
+            <p>Refresh your palate with our exquisite selection of white wines.
+                From crisp and zesty Sauvignon Blanc to creamy and luscious Chardonnay, our white wines 
+                are perfect for any setting, from casual get-togethers to elegant dinners.
+            </p>
+            <h2>Sparkling Wines for Every Celebration</h2>
+            <p>Celebrate life's special moments with our selection of sparkling wines. From the prestigious Champagne to the lively Prosecco,
+                 our sparkling wines add a touch of elegance and joy to any event.
+            </p>
+        </div>
+    </section>
+
+</body>
+</html>
+{% endblock %}

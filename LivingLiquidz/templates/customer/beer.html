@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beers</title>
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="canonical" href="">
+
+    <style>
+        h1{
+            font-size: 30px;
+            text-align: center;
+        }
+        h2{
+            font-size: 20px;
+            font-weight: 500;
+        }
+        p{
+            font-size: 14px;
+            text-align: justify;
+        }
+        .catimg{
+            max-width: 80%;
+        }
+        .head-sec{
+            padding: 20px;
+        }
+        body{
+            background-color: var(--bgcolor);
+        }
+        .cat-btn{
+            background-color: var(--color);
+            color: #ffffff;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container p-2">
+        <div class="head-sec">
+            <h1>Cheers to Craft: Discover the World of Beer</h1>
+            <p class="text-center">Uncap endless flavors and explore diverse brewing styles</p>
+        </div>
+        <div class="p-2 ">
+            <div class="row">
+                <div class=" col-sm-6 col-md-6 col-xl-6 text-center ">
+                    <img src="../../media/categories/beer.jpg" alt="beer" class="rounded catimg">
+                </div>
+                <div class="col-sm-6 col-md-6 col-xl-6 ">
+                    <div class="bg-white p-3 rounded shadow-lg">
+                        <div>
+                            <h2 class="mb-2">Domestic</h2>
+                            <div class="d-flex flex-wrap">
+                                <a class="cat-btn" href="#" target="_blank">Mild</a>
+                                <a class="cat-btn" href="#" target="_blank">Ale</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-3 mt-3 rounded shadow-lg">
+                        <div>
+                            <h2 class="mb-2">Imported</h2>
+                            <div class="d-flex flex-wrap">
+                                <a class="cat-btn" href="#" target="_blank">Mild</a>
+                                <a class="cat-btn" href="#" target="_blank">Ale</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="container mt-2">
+            <h2>Discover the Finest Beers at Liquor Legends</h2>
+            <p>Welcome to Liquor Legends, your ultimate destination for a world-class selection of beers. Whether you’re a craft beer aficionado or just looking to enjoy a classic brew, our extensive collection has something to suit every palate. Explore our curated range of lagers, ales, stouts, IPAs, and more from top breweries around the world.
+            </p>
+            <h2>Buy Lagers Online</h2>
+            <p>Experience the crisp and clean taste of our lagers. Known for their smooth and refreshing qualities, lagers are perfect for any occasion. Whether you prefer a light pilsner or a robust dunkel, our lager selection has something for everyone.
+            </p>
+            <h2>Featured Breweries</h2>
+            <p>At Liquor Legends, we partner with some of the best breweries around the world to bring you exceptional beers. Here are a few of our featured breweries
+            </p>
+            <h2>Expert Beer Tasting Tips</h2>
+            <p>Enhance your beer experience with our expert tasting tips. Discover the nuances and flavors of different beers and learn how to appreciate their unique characteristics.
+            </p>
+            <ul style="list-style: circle;">
+                <li>Look: Observe the color, clarity, and head of the beer.</li>
+                <li>Smell: Take a moment to inhale the aromas, noting any malt, hop, or yeast scents.</li>
+                <li>Taste: Sip and let the beer coat your palate, identifying different flavors and textures.</li>
+                <li>Finish: Pay attention to the aftertaste, noting how long the flavors linger and any additional notes that emerge.</li>
+            </ul>
+        </div>
+    </section>
+
+</body>
+</html>
+{% endblock %}
