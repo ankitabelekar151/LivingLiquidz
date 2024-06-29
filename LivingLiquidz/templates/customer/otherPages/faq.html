@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% block title %}FAQ's{% endblock %} 
 {% block content %}
 {% load static %}
 
@@ -8,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ's</title>
     <meta name="description" content="">
     <meta name="keyword" content="">
     <link rel="canonical" href="">
@@ -40,7 +40,9 @@
             align-items: center;
             margin-bottom: 20px;
         }
-
+        .container{
+          padding:40px 10px;
+        }
     </style>
 </head>
 <body>
@@ -65,7 +67,7 @@
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        What’s the difference between Scotch whisky and Bourbon?
+                        What's the difference between Scotch whisky and Bourbon?
                     </button>
                   </h2>
                   <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">

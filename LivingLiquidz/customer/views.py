@@ -22,10 +22,10 @@ def category_products(request,id):
     sub_category = Sub_Category.objects.all()
     sub_sub_category = Sub_Sub_Category.objects.get(id=id)
     products = Product.objects.filter(sub_sub_category__name=sub_sub_category.name)
-
     
     state_prices = StatePrice.objects.filter(product__in=products)
 
+    
     context = {
         'category':category,
         'sub_category':sub_category,
@@ -35,15 +35,10 @@ def category_products(request,id):
     }
     return render(request,'customer/category_products.html',context)
 
-
 def product_details(request,id):
     category = Category.objects.all()
     sub_category = Sub_Category.objects.all()
     sub_sub_category = Sub_Sub_Category.objects.get(id=id)
-  
-
-    all_products = Product.objects.exclude(id=id)
-  
     try:
         product = Product.objects.get(id=id)
         sub_sub_category = product.sub_sub_category
@@ -62,34 +57,123 @@ def product_details(request,id):
                'state_price':state_price,
                'all_products':all_products,
                }  
- 
+
 
     return render(request, 'customer/product_details.html',context)
 
-    
 def whisky(request):
-    return render(request,'customer/whisky.html')
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/whisky.html',context)
 
 def wine(request):
-    return render(request,'customer/wine.html')
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/wine.html',context)
 
 def vodka(request):
-    return render(request,'customer/vodka.html')
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/vodka.html',context)
 
 def beer(request):
-    return render(request,'customer/beer.html')
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/beer.html',context)
 
 def about(request):
-    return render(request,'customer/otherPages/about.html')
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/otherPages/about.html',context)
 
 def contact(request):
-    return render(request,'customer/otherPages/contact.html')
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/otherPages/contact.html',context)
 
 def privacyPolicy(request):
-    return render(request,'customer/otherPages/privacyPolicy.html')
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/otherPages/privacyPolicy.html',context)
 
 def termsConditions(request):
-    return render(request,'customer/otherPages/termsConditions.html')
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/otherPages/termsConditions.html',context)
 
 def faq(request):
-    return render(request,'customer/otherPages/faq.html')
+    category = Category.objects.all()
+    sub_category = Sub_Category.objects.all()
+    sub_sub_category = Sub_Sub_Category.objects.all()
+
+    context = {
+        'category':category,
+        'sub_category':sub_category,
+        'sub_sub_category': sub_sub_category,
+        
+    }
+    return render(request,'customer/otherPages/faq.html',context)
