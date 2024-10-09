@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create State Price</title>
+</head>
+<body>
+    <h1>Create State Price</h1>
+    <form action="/add_state_prices/" method="post">
+        {% csrf_token %}
+        
+        <label for="product">Product:</label>
+        <select id="product" name="product">
+            {% for product in products %}
+                <option value="{{ product.id }}">{{ product.title }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="state">State:</label>
+        <select id="state" name="state">
+            {% for code, name in states %}
+                <option value="{{ code }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="size_90ml">Size 90ml:</label>
+        <input type="number" id="size_90ml" name="size_90ml"><br><br>
+
+        <label for="size_180ml">Size 180ml:</label>
+        <input type="number" id="size_180ml" name="size_180ml"><br><br>
+
+        <label for="size_375ml">Size 375ml:</label>
+        <input type="number" id="size_375ml" name="size_375ml"><br><br>
+
+        <label for="size_750ml">Size 750ml:</label>
+        <input type="number" id="size_750ml" name="size_750ml"><br><br>
+
+        <label for="size_1ltr">Size 1ltr:</label>
+        <input type="number" id="size_1ltr" name="size_1ltr"><br><br>
+
+        <label for="size_2000ml">Size 2000ml:</label>
+        <input type="number" id="size_2000ml" name="size_2000ml"><br><br>
+
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

@@ -7,8 +7,86 @@ from seller.models import *
 # Create your views here.
 @login_required
 def admin_base(request):
-    return render(request,'admin_base.html')
+    return render(request,'admin/admin_base.html')
 
+@login_required
+def add_products(request):
+    if request.method == "POST":
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        brand = request.POST.get('brand')
+        product_image = request.FILES.get('product_image')
+        price = request.POST.get('price')
+        quantity = request.POST.get('quantity')
+        size = request.POST.get('size')
+        sub_sub_category_id = request.POST.get('sub_sub_category')
+        user_id = request.POST.get('user')
+        
+        sub_sub_category = Sub_Sub_Category.objects.get(id=sub_sub_category_id)
+        user = LlUser.objects.get(id=user_id)
+        
+        product = Product.objects.create(
+            sub_sub_category=sub_sub_category,
+            user=user,
+            title=title,
+            description=description,
+            brand=brand,
+            product_image=product_image,
+            price=price,
+            quantity=quantity,
+            size=size,
+            product_date=datetime.now()
+        )
+        
+        return redirect('/add_products/') 
+
+    sub_sub_categories = Sub_Sub_Category.objects.all()
+    users = LlUser.objects.all()
+    states = StatePrice.STATES
+    
+    
+    context = {
+        'sub_sub_categories': sub_sub_categories,
+        'users': users,
+        'states': states,
+    }
+    return render(request,'admin/add_products.html',context)
+
+@login_required
+def add_state_prices(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product')
+        state = request.POST.get('state')
+        size_90ml = request.POST.get('size_90ml')
+        size_180ml = request.POST.get('size_180ml')
+        size_375ml = request.POST.get('size_375ml')
+        size_750ml = request.POST.get('size_750ml')
+        size_1ltr = request.POST.get('size_1ltr')
+        size_2000ml = request.POST.get('size_2000ml')
+
+        product = Product.objects.get(id=product_id)
+
+        StatePrice.objects.create(
+            product=product,
+            state=state,
+            size_90ml=size_90ml,
+            size_180ml=size_180ml,
+            size_375ml=size_375ml,
+            size_750ml=size_750ml,
+            size_1ltr=size_1ltr,
+            size_2000ml=size_2000ml
+        )
+
+        return redirect('/add_state_prices/') 
+    
+    products= Product.objects.all()
+    states = StatePrice.STATES
+
+    context={
+        'products':products,
+        'states':states,
+    }
+    return render(request,'admin/add_state_prices.html', context)
 
 def seller_register_list(request):
     sellers = LlUser.objects.filter(is_seller=False,is_admin=False,is_customer=False) 

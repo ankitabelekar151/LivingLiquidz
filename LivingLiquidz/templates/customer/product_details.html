@@ -103,10 +103,10 @@
                     {% if price.size_1ltr %}<td>₹{{ price.size_1ltr }}</td> {% else %} <td>-</td> {% endif %}
                     {% if price.size_2000ml %}<td>₹{{ price.size_2000ml }}</td> {% else %} <td>-</td> {% endif %} 
                   </tr>
-                  {% endfor %}
-                  {% else %}
+                  
+                  {% comment %} {% else %}
                     <p>No state prices available for this product.</p>
-                  {% endif %}
+                  {% endif %} {% endcomment %}
               </tbody>
             </table>
           </div>

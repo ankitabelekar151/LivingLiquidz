@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Liquor Legends{% endblock %}</title>
+    <title>Admin Dashboard</title>
     <style>
         body {
             margin: 0;
@@ -48,18 +48,19 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <h3 style="color: red;">Liquid Legend</h3>
-        <a href="/seller_base/">Home</a>
-        <a href="/seller_add_product/">Add Products</a>
-        <a href="#payments">Payments</a>
+        <h3 style="color:#A67B5B;">Liquid Legend</h3>
+        <a href="/admin_base/">Home</a>
+        <a href="/add_products/">Add Products</a>
+        <a href="/add_state_prices/">Add State Prices</a>
+        <a href="/payments/">Payments</a>
         <a href="/admin_logout/">Logout</a>
-        <!-- Add more sidebar links as needed -->
+        
     </div>
 
-    <!-- Main content area -->
+    
     <div class="content">
         {% block content %}
-        <!-- Default content if not overridden in child templates -->
+        
         {% endblock %}
     </div>
 </body>

@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'Admin',
     'customer',
     
-   
 ]
 
 MIDDLEWARE = [
@@ -131,7 +130,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = [STATIC_DIR]
+# STATICFILES_DIRS = [STATIC_DIR]
 
 MEDIA_URL='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -156,17 +155,24 @@ EMAIL_HOST_USER = 'ankitabelekar151@gmail.com'
 EMAIL_HOST_PASSWORD = 'eexjxsyltlvvtpma'
 EMAIL_USE_TLS = True
 
-# LOGIN_URL = '/'
-# LOGOUT_URL = 'logout'
-# LOGIN_REDIRECT_URL = '/'
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
 
-# settings.py
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    # ],
 
-# # Session engine
-# SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #      'rest_framework.renderers.JSONRenderer',
+    #  ),
 
-# # Session cookie age (in seconds)
-# SESSION_COOKIE_AGE = 3600  # Set to desired session duration, e.g., 1 hour
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 
-# # Session expiration at browser close
-# SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # Set to True if you want sessions to expire on browser close
+     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+    ]
+}
+
